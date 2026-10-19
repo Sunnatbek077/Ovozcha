@@ -1,0 +1,9 @@
+# Skip configuration for the OvozchaTests module
+#
+# Skip plagini har bir modul uchun shu faylni talab qiladi. Usiz test target'i
+# qurilmaydi ("a Skip/ folder must exist and contain a skip.yml file").
+# Manba moduli sozlamasi: Sources/Ovozcha/Skip/skip.yml
+
+# this is a transpiled Skip Lite module
+skip:
+  mode: 'transpiled'

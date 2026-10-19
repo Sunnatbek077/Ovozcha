@@ -1,0 +1,442 @@
+{\rtf1\ansi\ansicpg1252\deff0\uc1
+{\fonttbl{\f0\fswiss Helvetica;}{\f1\fmodern Menlo;}}
+\f0\fs24\sa80
+{\b\fs36 Murabbiy ovozi: yozib olish ro'yxati}\par\par
+Talaffuz murabbiyi jonli ovoz bilan gapiradi (TTS emas). Har bir gap alohida qisqa fayl: ilova ularni ketma-ket ulab, to'liq gap yasaydi. Masalan:\par
+{\f1\fs22 word_rasm + coach_pos_start + letter_r + coach_instead_of + letter_l + coach_i_heard}\par
+{\f1\fs22 = "rasm so\u699?zining boshida r o\u699?rniga l eshitdim."}\par
+Fayl yo'q bo'lsa ilova buzilmaydi: murabbiy gapi faqat matn bo'lib ko'rinadi. Faqat {\b quloq o'yini} word_* va wrong_* yozuvlarisiz yopiq turadi.\par
+Jami: {\b 410 ta fayl}. Hammasini birdan yozish shart emas \u8212? bir harfdan boshlang (masalan R): shu harfning ko'rsatmasi, tovushi, bo'g'inlari va so'zlari yetarli.\par
+\par{\b\fs28 Qayerga qo'yiladi}\par
+{\f1\fs22 Sources/Ovozcha/Resources/Audio/<fayl nomi>.m4a}\par
+Papka yo'q bo'lsa, yarating. Qo'yilgandan keyin ilovani qayta yig'ing (skip app launch). Fayl nomi aynan jadvaldagidek bo'lishi shart (kichik harf, _).\par
+\par{\b\fs28 Yozish qoidalari}\par
+\bullet  Format: {\b m4a (AAC), mono}. mp3 va wav ham ishlaydi.\par
+\bullet  Tinch xona, telefon og'izdan ~20 sm. Bir kishi, bir xil ohang.\par
+\bullet  Boshi va oxiridagi jimlikni kesing (0.1 s dan oshmasin) \u8212? bo'laklar ulanganda gap tabiiy eshitilishi uchun.\par
+\bullet  Bolaga gapirgandek: iliq, sekinroq, aniq.\par
+\bullet  Bo'lak gaplarni (masalan coach_pos_start) gap o'rtasidagidek, pasaymaydigan ohangda ayting.\par
+\par{\b\fs28 Qo'shimcha foyda: nutq tanish etalonlari}\par
+word_* yozuvlari tekshiruv aniqligini ham oshiradi. Whisper to'g'ri aytilgan so'zni ham xato yozishi mumkin ("robot" -> "Lobots"). Buni bola xatosi deb hisoblamaslik uchun ularni Tools/reference-transcripts/audio/ ga so'zning o'zi nomi bilan nusxalang (word_robot.m4a -> robot.m4a) va Tools/reference-transcripts/build.py ni ishga tushiring.\par
+\par{\b\fs28 1. Murabbiy iboralari (25 ta)}\par
+1. {\b coach_praise_1} \u8212? Barakalla!\par
+2. {\b coach_praise_2} \u8212? Zo\u699?r!\par
+3. {\b coach_praise_3} \u8212? Juda to\u699?g\u699?ri!\par
+4. {\b coach_listen_repeat} \u8212? Tingla va takrorla.\par
+5. {\b coach_say_word} \u8212? Tingla, keyin o\u699?zing ayt.\par
+6. {\b coach_say_aloud} \u8212? Ovoz chiqarib ayt.\par
+7. {\b coach_self_listen} \u8212? Yaxshi! Endi o\u699?z ovozingni tingla.\par
+8. {\b coach_which_right} \u8212? Tingla: qaysi biri to\u699?g\u699?ri?\par
+9. {\b coach_first} \u8212? Birinchisi:\par
+10. {\b coach_second} \u8212? Ikkinchisi:\par
+11. {\b coach_listen_again} \u8212? Yana bir tinglab ko\u699?r.\par
+12. {\b coach_almost} \u8212? Deyarli! Yana bir marta, sekinroq ayt.\par
+13. {\b coach_try_again} \u8212? Yana bir marta aytib ko\u699?r.\par
+14. {\b coach_not_heard} \u8212? Eshitmadim. Balandroq ayt.\par
+15. {\b coach_move_on} \u8212? Yaxshi urinding! Xohlasang, keyingisiga o\u699?tamiz.\par
+16. {\b coach_once_more} \u8212? Yana bir bor!\par
+17. {\b coach_stage_done} \u8212? Barakalla! Bu bosqichni tugatding.\par
+18. {\b coach_stage_partial} \u8212? Yaxshi! Yana mashq qilsak, hammasi chiqadi.\par
+19. {\b coach_stage_retry} \u8212? Bosqich tugadi. Keling, yana bir bor urinib ko\u699?ramiz.\par
+20. {\b coach_pos_start} \u8212? so\u699?zining boshida\par
+21. {\b coach_pos_middle} \u8212? so\u699?zining o\u699?rtasida\par
+22. {\b coach_pos_end} \u8212? so\u699?zining oxirida\par
+23. {\b coach_instead_of} \u8212? o\u699?rniga\par
+24. {\b coach_i_heard} \u8212? eshitdim.\par
+25. {\b coach_sound_not_heard} \u8212? tovushini eshitmadim.\par
+\par{\b\fs28 2. Tovushni qanday aytish (29 ta)}\par
+Har bir dars boshida va xatodan keyin aytiladi.\par
+1. {\b coach_hint_a} \u8212? Og\u699?zingni katta och: aaa.\par
+2. {\b coach_hint_b} \u8212? Lablaringni yum, keyin ovoz bilan och: b-b-b.\par
+3. {\b coach_hint_d} \u8212? Til uchini tishlaring orqasiga tegizib, ovoz bilan: d-d-d.\par
+4. {\b coach_hint_e} \u8212? Og\u699?zingni biroz och, lablaringni yon tomonga cho\u699?z: eee.\par
+5. {\b coach_hint_f} \u8212? Yuqori tishlaringni pastki labingga tegizib, pufla: fff.\par
+6. {\b coach_hint_g} \u8212? Til orqasini tepaga ko\u699?tar, ovoz bilan: g-g-g.\par
+7. {\b coach_hint_h} \u8212? Og\u699?zingni ochib, iliq havo chiqar: hhh.\par
+8. {\b coach_hint_i} \u8212? Jilmayib, lablaringni cho\u699?z: iii.\par
+9. {\b coach_hint_j} \u8212? Lablaringni oldinga cho\u699?zib, ovoz bilan: j-j-j.\par
+10. {\b coach_hint_k} \u8212? Til orqasini tepaga ko\u699?tar, ovozsiz: k-k-k.\par
+11. {\b coach_hint_l} \u8212? Til uchini yuqori tishlaring orqasiga tegizib tur: lll.\par
+12. {\b coach_hint_m} \u8212? Lablaringni yum va g\u699?uvilla: mmm.\par
+13. {\b coach_hint_n} \u8212? Til uchini tishlaring orqasiga tegizib, burundan: nnn.\par
+14. {\b coach_hint_o} \u8212? Lablaringni yumaloq qil: ooo.\par
+15. {\b coach_hint_p} \u8212? Lablaringni yum, keyin puflab och: p-p-p.\par
+16. {\b coach_hint_q} \u8212? Tovushni tomog\u699?ingning ichkarisidan chiqar: q-q-q.\par
+17. {\b coach_hint_r} \u8212? Tilingni tepaga ko\u699?tar va titrat: rrr.\par
+18. {\b coach_hint_s} \u8212? Tishlaringni yaqin qilib, ilondek vishilla: sss.\par
+19. {\b coach_hint_t} \u8212? Til uchini tishlaring orqasiga tegizib, ovozsiz: t-t-t.\par
+20. {\b coach_hint_u} \u8212? Lablaringni oldinga, trubadek cho\u699?z: uuu.\par
+21. {\b coach_hint_v} \u8212? Yuqori tishlaringni pastki labingga tegizib, ovoz bilan: vvv.\par
+22. {\b coach_hint_x} \u8212? Tomog\u699?ingdan havo chiqarib xirilla: xxx.\par
+23. {\b coach_hint_y} \u8212? Til o\u699?rtasini tepaga ko\u699?tar: ya, yo, yu.\par
+24. {\b coach_hint_z} \u8212? Tishlaringni yaqin qilib, ariday g\u699?uvilla: zzz.\par
+25. {\b coach_hint_o_apos} \u8212? Lablaringni yumaloq qilib, chuqurroq: o\u699?o\u699?o\u699?.\par
+26. {\b coach_hint_g_apos} \u8212? Tomog\u699?ingdan, g\u699?arg\u699?ara qilganday: g\u699?g\u699?g\u699?.\par
+27. {\b coach_hint_sh} \u8212? Lablaringni oldinga cho\u699?zib, \u8220?jim\u8221? deganday: shhh.\par
+28. {\b coach_hint_ch} \u8212? Lablaringni oldinga cho\u699?zib, poyezddek: ch-ch-ch.\par
+29. {\b coach_hint_ng} \u8212? Og\u699?zingni ochiq tut, ovozni burundan chiqar: ng.\par
+\par{\b\fs28 3. Harf tovushlari (29 ta)}\par
+Harfning {\b nomi emas, tovushi} ("er" emas, "r"). Harflar, Sonlar va Talaffuz bo'limlarida ishlatiladi.\par
+1. {\b letter_a} \u8212? a\par
+2. {\b letter_b} \u8212? b\par
+3. {\b letter_d} \u8212? d\par
+4. {\b letter_e} \u8212? e\par
+5. {\b letter_f} \u8212? f\par
+6. {\b letter_g} \u8212? g\par
+7. {\b letter_h} \u8212? h\par
+8. {\b letter_i} \u8212? i\par
+9. {\b letter_j} \u8212? j\par
+10. {\b letter_k} \u8212? k\par
+11. {\b letter_l} \u8212? l\par
+12. {\b letter_m} \u8212? m\par
+13. {\b letter_n} \u8212? n\par
+14. {\b letter_o} \u8212? o\par
+15. {\b letter_p} \u8212? p\par
+16. {\b letter_q} \u8212? q\par
+17. {\b letter_r} \u8212? r\par
+18. {\b letter_s} \u8212? s\par
+19. {\b letter_t} \u8212? t\par
+20. {\b letter_u} \u8212? u\par
+21. {\b letter_v} \u8212? v\par
+22. {\b letter_x} \u8212? x\par
+23. {\b letter_y} \u8212? y\par
+24. {\b letter_z} \u8212? z\par
+25. {\b letter_o_apos} \u8212? o\u699?\par
+26. {\b letter_g_apos} \u8212? g\u699?\par
+27. {\b letter_sh} \u8212? sh\par
+28. {\b letter_ch} \u8212? ch\par
+29. {\b letter_ng} \u8212? ng\par
+\par{\b\fs28 4. Tovush va bo'g'inlar (74 ta)}\par
+Cho'ziladigan tovushni 2 soniyacha cho'zing; bo'g'inlar orasida qisqa pauza.\par
+1. {\b sound_a} \u8212? aaa\par
+2. {\b sound_b} \u8212? b-b-b\par
+3. {\b syl_b_open} \u8212? ba, bo, bu\par
+4. {\b syl_b_closed} \u8212? ab, ob, ub\par
+5. {\b sound_d} \u8212? d-d-d\par
+6. {\b syl_d_open} \u8212? da, do, du\par
+7. {\b syl_d_closed} \u8212? ad, od, ud\par
+8. {\b sound_e} \u8212? eee\par
+9. {\b sound_f} \u8212? fff\par
+10. {\b syl_f_open} \u8212? fa, fo, fu\par
+11. {\b syl_f_closed} \u8212? af, of, uf\par
+12. {\b sound_g} \u8212? g-g-g\par
+13. {\b syl_g_open} \u8212? ga, go, gu\par
+14. {\b syl_g_closed} \u8212? ag, og, ug\par
+15. {\b sound_h} \u8212? hhh\par
+16. {\b syl_h_open} \u8212? ha, ho, hu\par
+17. {\b syl_h_closed} \u8212? ah, oh, uh\par
+18. {\b sound_i} \u8212? iii\par
+19. {\b sound_j} \u8212? j-j-j\par
+20. {\b syl_j_open} \u8212? ja, jo, ju\par
+21. {\b syl_j_closed} \u8212? aj, oj, uj\par
+22. {\b sound_k} \u8212? k-k-k\par
+23. {\b syl_k_open} \u8212? ka, ko, ku\par
+24. {\b syl_k_closed} \u8212? ak, ok, uk\par
+25. {\b sound_l} \u8212? lll\par
+26. {\b syl_l_open} \u8212? la, lo, lu\par
+27. {\b syl_l_closed} \u8212? al, ol, ul\par
+28. {\b sound_m} \u8212? mmm\par
+29. {\b syl_m_open} \u8212? ma, mo, mu\par
+30. {\b syl_m_closed} \u8212? am, om, um\par
+31. {\b sound_n} \u8212? nnn\par
+32. {\b syl_n_open} \u8212? na, no, nu\par
+33. {\b syl_n_closed} \u8212? an, on, un\par
+34. {\b sound_o} \u8212? ooo\par
+35. {\b sound_p} \u8212? p-p-p\par
+36. {\b syl_p_open} \u8212? pa, po, pu\par
+37. {\b syl_p_closed} \u8212? ap, op, up\par
+38. {\b sound_q} \u8212? q-q-q\par
+39. {\b syl_q_open} \u8212? qa, qo, qu\par
+40. {\b syl_q_closed} \u8212? aq, oq, uq\par
+41. {\b sound_rrr} \u8212? rrr\par
+42. {\b syl_ra_ro_ru} \u8212? ra, ro, ru\par
+43. {\b syl_ar_or_ur} \u8212? ar, or, ur\par
+44. {\b sound_s} \u8212? sss\par
+45. {\b syl_s_open} \u8212? sa, so, su\par
+46. {\b syl_s_closed} \u8212? as, os, us\par
+47. {\b sound_t} \u8212? t-t-t\par
+48. {\b syl_t_open} \u8212? ta, to, tu\par
+49. {\b syl_t_closed} \u8212? at, ot, ut\par
+50. {\b sound_u} \u8212? uuu\par
+51. {\b sound_v} \u8212? vvv\par
+52. {\b syl_v_open} \u8212? va, vo, vu\par
+53. {\b syl_v_closed} \u8212? av, ov, uv\par
+54. {\b sound_x} \u8212? xxx\par
+55. {\b syl_x_open} \u8212? xa, xo, xu\par
+56. {\b syl_x_closed} \u8212? ax, ox, ux\par
+57. {\b sound_y} \u8212? y-y-y\par
+58. {\b syl_y_open} \u8212? ya, yo, yu\par
+59. {\b syl_y_closed} \u8212? ay, oy, uy\par
+60. {\b sound_z} \u8212? zzz\par
+61. {\b syl_z_open} \u8212? za, zo, zu\par
+62. {\b syl_z_closed} \u8212? az, oz, uz\par
+63. {\b sound_o_apos} \u8212? o\u699?o\u699?o\u699?\par
+64. {\b sound_g_apos} \u8212? g\u699?g\u699?g\u699?\par
+65. {\b syl_g_apos_open} \u8212? g\u699?a, g\u699?o, g\u699?u\par
+66. {\b syl_g_apos_closed} \u8212? ag\u699?, og\u699?, ug\u699?\par
+67. {\b sound_sh} \u8212? shhh\par
+68. {\b syl_sh_open} \u8212? sha, sho, shu\par
+69. {\b syl_sh_closed} \u8212? ash, osh, ush\par
+70. {\b sound_ch} \u8212? ch-ch-ch\par
+71. {\b syl_ch_open} \u8212? cha, cho, chu\par
+72. {\b syl_ch_closed} \u8212? ach, och, uch\par
+73. {\b sound_ng} \u8212? ng-ng-ng\par
+74. {\b syl_ng_closed} \u8212? ang, ong, ung\par
+\par{\b\fs28 5. So'zlar \u8212? to'g'ri aytilishi (193 ta)}\par
+Bir so'z bir necha darsda uchrasa ham, fayl bitta.\par
+1. {\b word_akula} \u8212? akula\par
+2. {\b word_ananas} \u8212? ananas\par
+3. {\b word_archa} \u8212? archa\par
+4. {\b word_ari} \u8212? ari\par
+5. {\b word_arra} \u8212? arra\par
+6. {\b word_asal} \u8212? asal\par
+7. {\b word_avtobus} \u8212? avtobus\par
+8. {\b word_ayiq} \u8212? ayiq\par
+9. {\b word_ayol} \u8212? ayol\par
+10. {\b word_baliq} \u8212? baliq\par
+11. {\b word_banan} \u8212? banan\par
+12. {\b word_barg} \u8212? barg\par
+13. {\b word_bo_ri} \u8212? bo\u699?ri\par
+14. {\b word_bodring} \u8212? bodring\par
+15. {\b word_bog_} \u8212? bog\u699?\par
+16. {\b word_bola} \u8212? bola\par
+17. {\b word_buqa} \u8212? buqa\par
+18. {\b word_burun} \u8212? burun\par
+19. {\b word_chana} \u8212? chana\par
+20. {\b word_chaqmoq} \u8212? chaqmoq\par
+21. {\b word_chelak} \u8212? chelak\par
+22. {\b word_chipta} \u8212? chipta\par
+23. {\b word_chiroq} \u8212? chiroq\par
+24. {\b word_chivin} \u8212? chivin\par
+25. {\b word_chizg_ich} \u8212? chizg\u699?ich\par
+26. {\b word_cho_tka} \u8212? cho\u699?tka\par
+27. {\b word_choy} \u8212? choy\par
+28. {\b word_daftar} \u8212? daftar\par
+29. {\b word_dala} \u8212? dala\par
+30. {\b word_daraxt} \u8212? daraxt\par
+31. {\b word_delfin} \u8212? delfin\par
+32. {\b word_dengiz} \u8212? dengiz\par
+33. {\b word_devor} \u8212? devor\par
+34. {\b word_dori} \u8212? dori\par
+35. {\b word_dunyo} \u8212? dunyo\par
+36. {\b word_echki} \u8212? echki\par
+37. {\b word_eshak} \u8212? eshak\par
+38. {\b word_eshik} \u8212? eshik\par
+39. {\b word_et} \u8212? et\par
+40. {\b word_etik} \u8212? etik\par
+41. {\b word_ferma} \u8212? ferma\par
+42. {\b word_fil} \u8212? fil\par
+43. {\b word_fonar} \u8212? fonar\par
+44. {\b word_fontan} \u8212? fontan\par
+45. {\b word_futbol} \u8212? futbol\par
+46. {\b word_g_ildirak} \u8212? g\u699?ildirak\par
+47. {\b word_g_isht} \u8212? g\u699?isht\par
+48. {\b word_g_or} \u8212? g\u699?or\par
+49. {\b word_g_oz} \u8212? g\u699?oz\par
+50. {\b word_gazeta} \u8212? gazeta\par
+51. {\b word_gilos} \u8212? gilos\par
+52. {\b word_globus} \u8212? globus\par
+53. {\b word_gubka} \u8212? gubka\par
+54. {\b word_gul} \u8212? gul\par
+55. {\b word_guruch} \u8212? guruch\par
+56. {\b word_hammom} \u8212? hammom\par
+57. {\b word_hamyon} \u8212? hamyon\par
+58. {\b word_hokkey} \u8212? hokkey\par
+59. {\b word_hovli} \u8212? hovli\par
+60. {\b word_hujjat} \u8212? hujjat\par
+61. {\b word_idish} \u8212? idish\par
+62. {\b word_igna} \u8212? igna\par
+63. {\b word_ikki} \u8212? ikki\par
+64. {\b word_ilon} \u8212? ilon\par
+65. {\b word_inson} \u8212? inson\par
+66. {\b word_ip} \u8212? ip\par
+67. {\b word_it} \u8212? it\par
+68. {\b word_jamoa} \u8212? jamoa\par
+69. {\b word_jinsi} \u8212? jinsi\par
+70. {\b word_jiraf} \u8212? jiraf\par
+71. {\b word_jo_ja} \u8212? jo\u699?ja\par
+72. {\b word_jun} \u8212? jun\par
+73. {\b word_kalit} \u8212? kalit\par
+74. {\b word_karam} \u8212? karam\par
+75. {\b word_kema} \u8212? kema\par
+76. {\b word_kitob} \u8212? kitob\par
+77. {\b word_kiyik} \u8212? kiyik\par
+78. {\b word_koptok} \u8212? koptok\par
+79. {\b word_kuchuk} \u8212? kuchuk\par
+80. {\b word_lab} \u8212? lab\par
+81. {\b word_lampa} \u8212? lampa\par
+82. {\b word_lenta} \u8212? lenta\par
+83. {\b word_lift} \u8212? lift\par
+84. {\b word_lola} \u8212? lola\par
+85. {\b word_makkajo_xori} \u8212? makkajo\u699?xori\par
+86. {\b word_mashina} \u8212? mashina\par
+87. {\b word_masjid} \u8212? masjid\par
+88. {\b word_meva} \u8212? meva\par
+89. {\b word_mikroskop} \u8212? mikroskop\par
+90. {\b word_ming} \u8212? ming\par
+91. {\b word_mix} \u8212? mix\par
+92. {\b word_mushuk} \u8212? mushuk\par
+93. {\b word_muz} \u8212? muz\par
+94. {\b word_nay} \u8212? nay\par
+95. {\b word_nok} \u8212? nok\par
+96. {\b word_non} \u8212? non\par
+97. {\b word_nonushta} \u8212? nonushta\par
+98. {\b word_nur} \u8212? nur\par
+99. {\b word_o_g_il} \u8212? o\u699?g\u699?il\par
+100. {\b word_o_rdak} \u8212? o\u699?rdak\par
+101. {\b word_o_rgimchak} \u8212? o\u699?rgimchak\par
+102. {\b word_o_rmon} \u8212? o\u699?rmon\par
+103. {\b word_o_t} \u8212? o\u699?t\par
+104. {\b word_o_tin} \u8212? o\u699?tin\par
+105. {\b word_ohang} \u8212? ohang\par
+106. {\b word_olcha} \u8212? olcha\par
+107. {\b word_olma} \u8212? olma\par
+108. {\b word_olov} \u8212? olov\par
+109. {\b word_ona} \u8212? ona\par
+110. {\b word_oqqush} \u8212? oqqush\par
+111. {\b word_oshxona} \u8212? oshxona\par
+112. {\b word_ot} \u8212? ot\par
+113. {\b word_oy} \u8212? oy\par
+114. {\b word_oyna} \u8212? oyna\par
+115. {\b word_palma} \u8212? palma\par
+116. {\b word_palto} \u8212? palto\par
+117. {\b word_paypoq} \u8212? paypoq\par
+118. {\b word_pingvin} \u8212? pingvin\par
+119. {\b word_piyoz} \u8212? piyoz\par
+120. {\b word_pomidor} \u8212? pomidor\par
+121. {\b word_poyezd} \u8212? poyezd\par
+122. {\b word_pul} \u8212? pul\par
+123. {\b word_qalam} \u8212? qalam\par
+124. {\b word_qaychi} \u8212? qaychi\par
+125. {\b word_qo_y} \u8212? qo\u699?y\par
+126. {\b word_qor} \u8212? qor\par
+127. {\b word_qovun} \u8212? qovun\par
+128. {\b word_qozon} \u8212? qozon\par
+129. {\b word_qulf} \u8212? qulf\par
+130. {\b word_qush} \u8212? qush\par
+131. {\b word_quyosh} \u8212? quyosh\par
+132. {\b word_ra_no} \u8212? ra\u700?no\par
+133. {\b word_raketa} \u8212? raketa\par
+134. {\b word_randa} \u8212? randa\par
+135. {\b word_rang} \u8212? rang\par
+136. {\b word_raqs} \u8212? raqs\par
+137. {\b word_rasm} \u8212? rasm\par
+138. {\b word_robot} \u8212? robot\par
+139. {\b word_ruchka} \u8212? ruchka\par
+140. {\b word_sabzi} \u8212? sabzi\par
+141. {\b word_shaftoli} \u8212? shaftoli\par
+142. {\b word_shahar} \u8212? shahar\par
+143. {\b word_shakar} \u8212? shakar\par
+144. {\b word_shar} \u8212? shar\par
+145. {\b word_shim} \u8212? shim\par
+146. {\b word_shisha} \u8212? shisha\par
+147. {\b word_shlyapa} \u8212? shlyapa\par
+148. {\b word_shokolad} \u8212? shokolad\par
+149. {\b word_sholg_om} \u8212? sholg\u699?om\par
+150. {\b word_sichqon} \u8212? sichqon\par
+151. {\b word_sigir} \u8212? sigir\par
+152. {\b word_singil} \u8212? singil\par
+153. {\b word_soat} \u8212? soat\par
+154. {\b word_stul} \u8212? stul\par
+155. {\b word_sut} \u8212? sut\par
+156. {\b word_suv} \u8212? suv\par
+157. {\b word_tarvuz} \u8212? tarvuz\par
+158. {\b word_telefon} \u8212? telefon\par
+159. {\b word_tish} \u8212? tish\par
+160. {\b word_tog_} \u8212? tog\u699?\par
+161. {\b word_tong} \u8212? tong\par
+162. {\b word_tovuq} \u8212? tovuq\par
+163. {\b word_tuya} \u8212? tuya\par
+164. {\b word_tuz} \u8212? tuz\par
+165. {\b word_ukki} \u8212? ukki\par
+166. {\b word_usta} \u8212? usta\par
+167. {\b word_uy} \u8212? uy\par
+168. {\b word_uzuk} \u8212? uzuk\par
+169. {\b word_uzum} \u8212? uzum\par
+170. {\b word_vagon} \u8212? vagon\par
+171. {\b word_vaza} \u8212? vaza\par
+172. {\b word_velosiped} \u8212? velosiped\par
+173. {\b word_vilka} \u8212? vilka\par
+174. {\b word_vulqon} \u8212? vulqon\par
+175. {\b word_xalta} \u8212? xalta\par
+176. {\b word_xamir} \u8212? xamir\par
+177. {\b word_xarita} \u8212? xarita\par
+178. {\b word_xat} \u8212? xat\par
+179. {\b word_xo_roz} \u8212? xo\u699?roz\par
+180. {\b word_yaproq} \u8212? yaproq\par
+181. {\b word_yer} \u8212? yer\par
+182. {\b word_yo_l} \u8212? yo\u699?l\par
+183. {\b word_yog_} \u8212? yog\u699?\par
+184. {\b word_yomg_ir} \u8212? yomg\u699?ir\par
+185. {\b word_yong_oq} \u8212? yong\u699?oq\par
+186. {\b word_yoz} \u8212? yoz\par
+187. {\b word_yulduz} \u8212? yulduz\par
+188. {\b word_yurak} \u8212? yurak\par
+189. {\b word_zanjir} \u8212? zanjir\par
+190. {\b word_zavod} \u8212? zavod\par
+191. {\b word_zaytun} \u8212? zaytun\par
+192. {\b word_zebra} \u8212? zebra\par
+193. {\b word_zontik} \u8212? zontik\par
+\par{\b\fs28 6. Quloq o'yini \u8212? noto'g'ri aytilishi (60 ta)}\par
+Bola qanday xato qilsa, aynan shunday ayting: aniq, lekin masxara qilmasdan.\par
+1. {\b wrong_ayya} \u8212? ayya (arra o'rniga)\par
+2. {\b wrong_bagon} \u8212? bagon (vagon o'rniga)\par
+3. {\b wrong_baza} \u8212? baza (vaza o'rniga)\par
+4. {\b wrong_bilka} \u8212? bilka (vilka o'rniga)\par
+5. {\b wrong_bulqon} \u8212? bulqon (vulqon o'rniga)\par
+6. {\b wrong_deniz} \u8212? deniz (dengiz o'rniga)\par
+7. {\b wrong_dilos} \u8212? dilos (gilos o'rniga)\par
+8. {\b wrong_dubka} \u8212? dubka (gubka o'rniga)\par
+9. {\b wrong_dul} \u8212? dul (gul o'rniga)\par
+10. {\b wrong_duruch} \u8212? duruch (guruch o'rniga)\par
+11. {\b wrong_gildirak} \u8212? gildirak (g\u699?ildirak o'rniga)\par
+12. {\b wrong_gisht} \u8212? gisht (g\u699?isht o'rniga)\par
+13. {\b wrong_gor} \u8212? gor (g\u699?or o'rniga)\par
+14. {\b wrong_goz} \u8212? goz (g\u699?oz o'rniga)\par
+15. {\b wrong_kalta} \u8212? kalta (xalta o'rniga)\par
+16. {\b wrong_kamir} \u8212? kamir (xamir o'rniga)\par
+17. {\b wrong_kat} \u8212? kat (xat o'rniga)\par
+18. {\b wrong_ko_roz} \u8212? ko\u699?roz (xo\u699?roz o'rniga)\par
+19. {\b wrong_ko_y} \u8212? ko\u699?y (qo\u699?y o'rniga)\par
+20. {\b wrong_kor} \u8212? kor (qor o'rniga)\par
+21. {\b wrong_kulf} \u8212? kulf (qulf o'rniga)\par
+22. {\b wrong_kush} \u8212? kush (qush o'rniga)\par
+23. {\b wrong_laketa} \u8212? laketa (raketa o'rniga)\par
+24. {\b wrong_lasm} \u8212? lasm (rasm o'rniga)\par
+25. {\b wrong_lobot} \u8212? lobot (robot o'rniga)\par
+26. {\b wrong_min} \u8212? min (ming o'rniga)\par
+27. {\b wrong_og_il} \u8212? og\u699?il (o\u699?g\u699?il o'rniga)\par
+28. {\b wrong_ordak} \u8212? ordak (o\u699?rdak o'rniga)\par
+29. {\b wrong_ot} \u8212? ot (o\u699?t o'rniga)\par
+30. {\b wrong_otin} \u8212? otin (o\u699?tin o'rniga)\par
+31. {\b wrong_perma} \u8212? perma (ferma o'rniga)\par
+32. {\b wrong_pil} \u8212? pil (fil o'rniga)\par
+33. {\b wrong_pinvin} \u8212? pinvin (pingvin o'rniga)\par
+34. {\b wrong_ponar} \u8212? ponar (fonar o'rniga)\par
+35. {\b wrong_pontan} \u8212? pontan (fontan o'rniga)\par
+36. {\b wrong_sahar} \u8212? sahar (shahar o'rniga)\par
+37. {\b wrong_sanjir} \u8212? sanjir (zanjir o'rniga)\par
+38. {\b wrong_sar} \u8212? sar (shar o'rniga)\par
+39. {\b wrong_savod} \u8212? savod (zavod o'rniga)\par
+40. {\b wrong_saytun} \u8212? saytun (zaytun o'rniga)\par
+41. {\b wrong_sebra} \u8212? sebra (zebra o'rniga)\par
+42. {\b wrong_shana} \u8212? shana (chana o'rniga)\par
+43. {\b wrong_shelak} \u8212? shelak (chelak o'rniga)\par
+44. {\b wrong_shipta} \u8212? shipta (chipta o'rniga)\par
+45. {\b wrong_shoy} \u8212? shoy (choy o'rniga)\par
+46. {\b wrong_sim} \u8212? sim (shim o'rniga)\par
+47. {\b wrong_sinil} \u8212? sinil (singil o'rniga)\par
+48. {\b wrong_sisa} \u8212? sisa (shisha o'rniga)\par
+49. {\b wrong_talit} \u8212? talit (kalit o'rniga)\par
+50. {\b wrong_taram} \u8212? taram (karam o'rniga)\par
+51. {\b wrong_tema} \u8212? tema (kema o'rniga)\par
+52. {\b wrong_titob} \u8212? titob (kitob o'rniga)\par
+53. {\b wrong_yab} \u8212? yab (lab o'rniga)\par
+54. {\b wrong_yampa} \u8212? yampa (lampa o'rniga)\par
+55. {\b wrong_yift} \u8212? yift (lift o'rniga)\par
+56. {\b wrong_yoya} \u8212? yoya (lola o'rniga)\par
+57. {\b wrong_zamoa} \u8212? zamoa (jamoa o'rniga)\par
+58. {\b wrong_zinsi} \u8212? zinsi (jinsi o'rniga)\par
+59. {\b wrong_zo_za} \u8212? zo\u699?za (jo\u699?ja o'rniga)\par
+60. {\b wrong_zun} \u8212? zun (jun o'rniga)\par
+}

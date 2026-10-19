@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ovozcha: Android vektor ikonkasi. Manba: Material Icons (Apache 2.0), 24x24.
+     Rang `Icon(tint:)` orqali beriladi, shuning uchun bu yerda qora qoldirilgan. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M2.15,7.7l2.6,-1.7h1.6v10.3h-1.7v-8.2l-1.6,1.0zM1.95,16.3h6.0v1.7h-6.0zM9.55,6h5.4v1.7h-5.4zM13.25,6h1.7v6.85h-1.7zM9.55,11.15h5.4v1.7h-5.4zM9.55,11.15h1.7v6.85h-1.7zM9.55,16.3h5.4v1.7h-5.4zM16.65,6h5.4v1.7h-5.4zM20.35,6h1.7v6.85h-1.7zM16.65,11.15h5.4v1.7h-5.4zM20.35,11.15h1.7v6.85h-1.7zM16.65,16.3h5.4v1.7h-5.4z" />
+</vector>
