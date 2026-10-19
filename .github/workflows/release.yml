@@ -63,6 +63,17 @@ jobs:
       - name: Export release builds
         run: skip export --release -d export/
 
+      - name: Show export log on failure
+        if: failure()
+        run: |
+          for f in /tmp/skip-export-*.txt; do
+            echo "::group::$f"
+            grep -nE "error|FAILED|What went wrong|Exception|Caused by" "$f" | head -100 || true
+            echo "--- last 150 lines ---"
+            tail -150 "$f"
+            echo "::endgroup::"
+          done
+
       - name: Upload to GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
