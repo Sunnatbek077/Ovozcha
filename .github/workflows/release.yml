@@ -60,6 +60,17 @@ jobs:
           # iOS: Info.plist (only on the runner, never committed).
           /usr/libexec/PlistBuddy -c "Add :OvozchaGroqKey string $GROQ_API_KEY" Darwin/Info.plist
 
+      # Without Android/app/keystore.properties the release build is signed with the debug key
+      # (Android/app/build.gradle.kts), which doesn't exist yet on a fresh runner.
+      - name: Create Android debug keystore
+        run: |
+          mkdir -p ~/.android
+          if [ ! -f ~/.android/debug.keystore ]; then
+            keytool -genkeypair -keystore ~/.android/debug.keystore -storepass android \
+              -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 \
+              -dname "CN=Android Debug,O=Android,C=US"
+          fi
+
       - name: Export release builds
         run: skip export --release -d export/
 
