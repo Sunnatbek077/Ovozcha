@@ -1,67 +1,69 @@
 # Ovozcha
 
-3–5 yoshli o'zbek bolalari uchun savodxonlik ilovasi: harf va sonlarni yozish, tovushlarni
-eshitish, talaffuz murabbiyi va imlo lug'ati. Bitta Swift/SwiftUI kodidan **iOS** va **Android**
-ilovasi chiqadi: Android qismini [Skip](https://skip.dev) Swift kodidan Kotlin/Jetpack Compose'ga
-o'girib quradi.
+A literacy app for Uzbek children aged 3–5: writing letters and numbers, listening to sounds,
+a pronunciation coach and a spelling dictionary. A single Swift/SwiftUI codebase produces both
+the **iOS** and the **Android** app: [Skip](https://skip.dev) transpiles the Swift code to
+Kotlin/Jetpack Compose for Android.
 
-| Bo'lim | Ishlashi |
+The app's interface is in Uzbek.
+
+| Section | Works |
 |---|---|
-| Harflar, Sonlar | Internetsiz |
-| Talaffuz murabbiyi | Internet + nutq tanish xizmati kerak (pastda [5-qadam](#5-qadam-talaffuz-uchun-kalit-ixtiyoriy)) |
-| Imlo lug'ati | Birinchi ochilishda internetdan yuklanadi, keyin keshdan ishlaydi |
+| Letters, Numbers | Offline |
+| Pronunciation coach | Needs internet and a speech-recognition service (see [Step 5](#step-5-pronunciation-key-optional)) |
+| Spelling dictionary | Downloaded on first open, then works from the local cache |
 
 ---
 
-## Talablar
+## Requirements
 
-Loyiha faqat **macOS** da quriladi: iOS qismi uchun Xcode kerak, Skip ham Xcode orqali ishlaydi.
+The project builds on **macOS only**: the iOS app needs Xcode, and Skip runs through Xcode as well.
 
-| Vosita | Versiya | Izoh |
+| Tool | Version | Notes |
 |---|---|---|
-| macOS | 14+ | Apple Silicon (M1 va yangi) tavsiya etiladi |
-| Xcode | **26 yoki yangi** | Kodda iOS 26 API'lari (Liquid Glass) bor, eski SDK bilan qurilmaydi. Xcode 27.1 da sinalgan |
-| Homebrew | istalgan | [brew.sh](https://brew.sh) |
-| Skip | 1.9.10+ | Homebrew orqali o'rnatiladi, Gradle va JDK'ni ham olib keladi |
-| Android Studio | istalgan yangi | Faqat Android SDK va emulyator uchun kerak, kod unda yozilmaydi |
+| macOS | 14+ | Apple Silicon (M1 or newer) recommended |
+| Xcode | **26 or newer** | The code uses iOS 26 APIs (Liquid Glass) and will not build with an older SDK. Tested with Xcode 27.1 |
+| Homebrew | any | [brew.sh](https://brew.sh) |
+| Skip | 1.9.10+ | Installed via Homebrew; also brings Gradle and a JDK |
+| Android Studio | any recent | Only needed for the Android SDK and emulator; you don't write code in it |
 
-Ilova ishlaydigan qurilmalar: **iOS 17+**, **Android 12+** (API 31).
+Supported devices: **iOS 17+**, **Android 12+** (API 31).
 
 ---
 
-## 1-qadam. Vositalarni o'rnatish
+## Step 1. Install the tools
 
-Bu qadam kompyuterga bir marta bajariladi.
+You only need to do this once per machine.
 
-**Xcode.** App Store'dan o'rnating, bir marta ochib, litsenziyani qabul qiling va iOS
-simulyatorini yuklab oling (Xcode o'zi taklif qiladi). Keyin:
+**Xcode.** Install it from the App Store, open it once, accept the license and download the iOS
+simulator (Xcode offers it on first launch). Then:
 
 ```bash
 sudo xcode-select -s /Applications/Xcode.app
 ```
 
-**Skip** (Gradle va OpenJDK bilan birga o'rnatiladi):
+**Skip** (installs Gradle and OpenJDK as well):
 
 ```bash
 brew install skiptools/skip/skip
 ```
 
-**Android Studio.** [developer.android.com/studio](https://developer.android.com/studio) dan
-o'rnating va bir marta ochib, birinchi sozlash ustasini (SDK yuklash) oxirigacha o'tkazing.
-SDK odatda `~/Library/Android/sdk` ga tushadi.
+**Android Studio.** Install it from
+[developer.android.com/studio](https://developer.android.com/studio), open it once and finish
+the setup wizard (it downloads the SDK). The SDK usually ends up in `~/Library/Android/sdk`.
 
-**Tekshiruv.** Hammasi joyidami, Skip o'zi aytadi:
+**Check.** Skip tells you whether everything is in place:
 
 ```bash
 skip doctor
 ```
 
-Har bir qatorda `[✓]` bo'lishi kerak. `[!] A new version is available` ogohlantirishi
-xalaqit bermaydi. `[✗]` chiqsa, o'sha qatordagi ko'rsatmani bajaring.
+Every line should show `[✓]`. The `[!] A new version is available` warning is harmless. If you
+see `[✗]`, follow the hint on that line.
 
 ---
 
-## 2-qadam. Repozitoriyni klonlash
+## Step 2. Clone the repository
 
 ```bash
 git clone https://github.com/Sunnatbek077/Ovozcha.git
@@ -71,109 +73,109 @@ git clone https://github.com/Sunnatbek077/Ovozcha.git
 cd Ovozcha
 ```
 
-Swift paketlari (Skip, SkipUI) birinchi qurishda o'zi yuklanadi. Aniq versiyalar
-`Package.resolved` da qotirilgan, shuning uchun hamma bir xil versiya bilan quradi.
+Swift packages (Skip, SkipUI) are fetched automatically on the first build. Exact versions are
+pinned in `Package.resolved`, so everyone builds with the same versions.
 
 ---
 
-## 3-qadam. iOS'da ishga tushirish
+## Step 3. Run on iOS
 
-### Xcode orqali
+### From Xcode
 
 ```bash
 open Project.xcworkspace
 ```
 
-1. Xcode yuqorisidagi sxema ro'yxatidan **`Ovozcha App`** ni tanlang.
-   `Ovozcha` (ilovasiz) sxema faqat kutubxonani quradi: ilova ishga tushmaydi va audio fayllar
-   ichiga kirmaydi.
-2. Qurilma sifatida iPhone simulyatorini tanlang (masalan, *iPhone 17*).
-3. **⌘R** (Product → Run).
+1. In the scheme menu at the top of Xcode, select **`Ovozcha App`**.
+   The `Ovozcha` scheme (without "App") only builds the library: the app won't launch and the
+   audio files won't be bundled.
+2. Pick an iPhone simulator as the run destination (e.g. *iPhone 17*).
+3. Press **⌘R** (Product → Run).
 
-Birinchi qurish bir necha daqiqa oladi: paketlar yuklanadi va Skip ishga tushadi.
+The first build takes a few minutes while packages download and Skip runs.
 
-> **Muhim: Xcode Android'ni ham quradi.** `Darwin/Ovozcha.xcconfig` da
-> `SKIP_ACTION = launch` turibdi: har gal ⌘R bosilganda Xcode Android ilovasini ham quradi va
-> ochiq Android emulyatoriga o'rnatadi. Android emulyatori ochiq bo'lmasa, bu qism xato berishi
-> mumkin. Faqat iOS kerak bo'lsa, quyidagi buyruq qulayroq. Xcode'da esa shu faylda
-> `SKIP_ACTION = none` qatorini yoqib qo'ying (bu o'zgarishni commit qilmang).
+> **Important: Xcode also builds Android.** `Darwin/Ovozcha.xcconfig` contains
+> `SKIP_ACTION = launch`, so every ⌘R also builds the Android app and installs it on the running
+> Android emulator. If no emulator is running, that part of the build fails. If you only need
+> iOS, the command below is easier; in Xcode you can instead enable the `SKIP_ACTION = none`
+> line in that file (don't commit that change).
 
-### Buyruq qatori orqali (faqat iOS)
+### From the command line (iOS only)
 
-Avval simulyatorni oching (Xcode → Open Developer Tool → Simulator yoki
-`open -a Simulator`), keyin:
+Open a simulator first (Xcode → Open Developer Tool → Simulator, or `open -a Simulator`), then:
 
 ```bash
 skip app launch --ios
 ```
 
-### Haqiqiy iPhone'da
+### On a real iPhone
 
-Xcode → `Ovozcha App` target → **Signing & Capabilities** → **Team** ga Apple ID'ingizni
-tanlang. Bundle ID band deb xato chiqsa, `Skip.env` dagi `PRODUCT_BUNDLE_IDENTIFIER` ni
-o'zingiznikiga almashtiring (masalan, `com.ismingiz.Ovozcha`).
+In Xcode select the `Ovozcha App` target → **Signing & Capabilities** → set **Team** to your
+Apple ID. If you get an error that the bundle ID is taken, change `PRODUCT_BUNDLE_IDENTIFIER`
+in `Skip.env` to your own (e.g. `com.yourname.Ovozcha`).
 
 ---
 
-## 4-qadam. Android'da ishga tushirish
+## Step 4. Run on Android
 
-### Emulyator yaratish (bir marta)
+### Create an emulator (once)
 
 ```bash
 skip android emulator create
 ```
 
-Mavjud emulyatorlar ro'yxati: `skip android emulator list`. Android Studio'dagi
-Device Manager orqali yaratilgan emulyator ham bo'ladi.
+List existing emulators with `skip android emulator list`. An emulator created in Android
+Studio's Device Manager works too.
 
-### Emulyatorni ochish
+### Start the emulator
 
 ```bash
 skip android emulator launch
 ```
 
-Emulyator to'liq yuklanib, bosh ekrani chiqquncha kuting.
+Wait until the emulator has fully booted to its home screen.
 
-### Ilovani qurish va o'rnatish
+### Build and install the app
 
-Loyiha ildizida (`Ovozcha` papkasida):
+From the repository root (the `Ovozcha` folder):
 
 ```bash
 skip app launch --android
 ```
 
-Bu buyruq Swift kodini Kotlin'ga o'giradi, Gradle bilan quradi va emulyatorga o'rnatib ochadi.
-**Birinchi qurish 5–10 daqiqa** oladi (Gradle bog'liqliklarni yuklaydi), keyingilari tezroq.
+This transpiles the Swift code to Kotlin, builds it with Gradle, installs it on the emulator and
+opens it. **The first build takes 5–10 minutes** (Gradle downloads dependencies); later builds
+are much faster.
 
-Haqiqiy Android telefonda: telefonda *Developer options → USB debugging* ni yoqing, USB bilan
-ulang, `adb devices` ro'yxatida telefon ko'rinsin, keyin xuddi shu `skip app launch --android`.
+On a physical Android phone: enable *Developer options → USB debugging*, connect it over USB,
+make sure it shows up in `adb devices`, then run the same `skip app launch --android`.
 
-### Android Studio'da ochish (ixtiyoriy)
+### Opening in Android Studio (optional)
 
-Android Studio → **Open** → repozitoriydagi `Android` papkasi. Bu loglarni ko'rish va
-Compose'ni tekshirish uchun qulay, lekin kodni Swift'da (`Sources/`) o'zgartiring:
-Kotlin fayllari har qurishda qaytadan yaratiladi.
+Android Studio → **Open** → the `Android` folder of the repository. This is handy for logs and
+inspecting Compose, but edit the code in Swift (`Sources/`): the Kotlin files are regenerated on
+every build.
 
 ---
 
-## 5-qadam. Talaffuz uchun kalit (ixtiyoriy)
+## Step 5. Pronunciation key (optional)
 
-Ilova kalitsiz ham to'liq ishga tushadi. Kalit faqat **Talaffuz murabbiyi** bola aytgan so'zni
-tekshirishi uchun kerak. Kalit bo'lmasa, ekranda "Tekshirish hozir ishlamayapti" chiqadi, qolgan
-bo'limlar oddiy ishlaydi.
+The app runs fully without a key. The key is only needed for the **pronunciation coach** to check
+the word the child said. Without it the screen shows "Tekshirish hozir ishlamayapti" ("Checking
+is not available right now"); every other section works normally.
 
-Nutq matnga [Groq](https://console.groq.com) (Whisper modeli) orqali aylantiriladi. Ikki yo'l bor:
+Speech is converted to text via [Groq](https://console.groq.com) (Whisper model). There are two
+options:
 
-| Yo'l | Qachon | Sozlama nomi |
+| Option | When | Setting name |
 |---|---|---|
-| O'z serveringiz (proksi) | Ilovani do'konga chiqarish | `OvozchaTranscriptionEndpoint` (faqat `https://`) |
-| Groq kaliti to'g'ridan-to'g'ri | Faqat ishlab chiqish va sinov | `OvozchaGroqKey` |
+| Your own server (proxy) | Shipping to the stores | `OvozchaTranscriptionEndpoint` (`https://` only) |
+| Groq key directly in the app | Development and testing only | `OvozchaGroqKey` |
 
-> **Kalitni hech qachon commit qilmang.** Repozitoriy ochiq. Ilovaga joylangan kalitni
-> APK/IPA dan chiqarib olish mumkin, shuning uchun do'kon versiyasida faqat server manzili
-> bo'lishi kerak.
+> **Never commit a key.** This repository is public. A key embedded in the app can be extracted
+> from the APK/IPA, so store builds must only contain a server URL.
 
-**Android.** Namunadan nusxa oling va kalitni yozing:
+**Android.** Copy the template and fill in the key:
 
 ```bash
 cp Android/secrets.example.xml Android/app/src/main/res/values/secrets.xml
@@ -183,55 +185,56 @@ cp Android/secrets.example.xml Android/app/src/main/res/values/secrets.xml
 <string name="OvozchaGroqKey">gsk_...</string>
 ```
 
-`secrets.xml` `.gitignore` da, Git uni ko'rmaydi. Namuna `res/values/` dan tashqarida turadi:
-ichida bo'lsa, Android "Duplicate resources" xatosini beradi.
+`secrets.xml` is in `.gitignore`, so Git ignores it. The template lives outside `res/values/`
+on purpose: if it were inside, Android would fail with "Duplicate resources".
 
-**iOS.** `Darwin/Info.plist` ga qo'shing:
+**iOS.** Add to `Darwin/Info.plist`:
 
 ```xml
 <key>OvozchaGroqKey</key>
 <string>gsk_...</string>
 ```
 
-`Info.plist` **repozitoriyda kuzatiladi**. Kalit yozilgan faylni commit qilmaslik uchun
-Git'ga o'zgarishni e'tiborsiz qoldirishni ayting:
+`Info.plist` **is tracked in the repository**. To avoid committing it with the key, tell Git to
+ignore your local changes:
 
 ```bash
 git update-index --skip-worktree Darwin/Info.plist
 ```
 
-Qaytarish: `git update-index --no-skip-worktree Darwin/Info.plist`.
+To undo: `git update-index --no-skip-worktree Darwin/Info.plist`.
 
 ---
 
-## Loyiha tuzilishi
+## Project structure
 
 ```
 Ovozcha/
-├── Package.swift              Swift paketi (Skip, SkipUI bog'liqliklari)
-├── Skip.env                   Ilova nomi, bundle ID, versiya (iOS va Android uchun umumiy)
-├── Project.xcworkspace        Xcode'da shuni oching
-├── Sources/Ovozcha/           BUTUN ilova kodi: iOS va Android uchun bitta
-│   ├── App/                   Tab paneli, navigatsiya
-│   ├── Core/                  Matnlar (Strings.swift), sozlamalar, tarmoq
-│   ├── DesignSystem/          Ranglar, shriftlar, umumiy modifikatorlar
-│   ├── Features/              Ekranlar: Home, Letters, Numbers, Pronunciation,
+├── Package.swift              Swift package (Skip, SkipUI dependencies)
+├── Skip.env                   App name, bundle ID, version (shared by iOS and Android)
+├── Project.xcworkspace        Open this in Xcode
+├── Sources/Ovozcha/           ALL app code: one codebase for iOS and Android
+│   ├── App/                   Tab bar, navigation
+│   ├── Core/                  UI strings (Strings.swift), config, networking
+│   ├── DesignSystem/          Colors, fonts, shared modifiers
+│   ├── Features/              Screens: Home, Letters, Numbers, Pronunciation,
 │   │                          Spelling, Parent, Setup, Shared
-│   └── Resources/             Audio (murabbiy ovozi), shriftlar, rasmlar
-├── Darwin/                    iOS ilova qobig'i (Xcode loyihasi, Info.plist, ikonka)
-├── Android/                   Android ilova qobig'i (Gradle, AndroidManifest)
-├── Tests/OvozchaTests/        Testlar
-├── Tools/                     Yordamchi skriptlar (audio ro'yxati, etalon transkriptlar)
-└── VAZIFALAR.md               Ochiq ishlar ro'yxati
+│   └── Resources/             Audio (coach voice), fonts, images
+├── Darwin/                    iOS app shell (Xcode project, Info.plist, icon)
+├── Android/                   Android app shell (Gradle, AndroidManifest)
+├── Tests/OvozchaTests/        Tests
+├── Tools/                     Helper scripts (audio list, reference transcripts)
+└── VAZIFALAR.md               Open tasks (in Uzbek)
 ```
 
-Platformaga xos kod `#if SKIP` (Android) va `#if !SKIP` (iOS) bloklari ichida.
+Platform-specific code lives in `#if SKIP` (Android) and `#if !SKIP` (iOS) blocks.
 
-### Murabbiy ovozi (audio)
+### Coach voice (audio)
 
-Ovoz fayllari `Sources/Ovozcha/Resources/Audio/` da. Qaysi fayl kerakligi va qanday nomlanishi:
-[`Tools/voice-recordings/README.md`](Tools/voice-recordings/README.md). Fayl yo'q bo'lsa,
-murabbiy matn bilan gapiradi, ilova qulamaydi. Darslarga so'z qo'shilsa, ro'yxatni qayta yasang:
+Voice files are in `Sources/Ovozcha/Resources/Audio/`. Which files are needed and how they are
+named: [`Tools/voice-recordings/README.md`](Tools/voice-recordings/README.md). If a file is
+missing, the coach falls back to text and the app does not crash. After adding words to the
+lessons, regenerate the list:
 
 ```bash
 sh Tools/voice-recordings/generate.sh
@@ -239,34 +242,34 @@ sh Tools/voice-recordings/generate.sh
 
 ---
 
-## Testlar
+## Tests
 
-`Tests/OvozchaTests/` da testlar yozilgan, lekin **hozircha ishga tushmaydi**: test to'plami
-macOS uchun quriladi, ilova kodi esa faqat iOS/Android API'lari bilan kompilyatsiya bo'ladi.
-Bu [`VAZIFALAR.md`](VAZIFALAR.md) da ochiq ish sifatida turibdi.
+Tests are written in `Tests/OvozchaTests/`, but **they don't run yet**: the test bundle builds
+for macOS, while the app code only compiles against iOS/Android APIs. This is tracked as an open
+task in [`VAZIFALAR.md`](VAZIFALAR.md).
 
 ---
 
-## Tez-tez uchraydigan muammolar
+## Troubleshooting
 
-| Belgi | Sabab va yechim |
+| Symptom | Cause and fix |
 |---|---|
-| Ilova ochiladi, lekin ovoz chiqmaydi | `Ovozcha` sxemasi bilan qurilgan. **`Ovozcha App`** ni tanlang |
-| Xcode iOS'ni qurdi, lekin Android qismida xato | Android emulyatori ochiq emas. Uni oching yoki `skip app launch --ios` ni ishlating |
-| `skip: command not found` | `brew install skiptools/skip/skip`, keyin terminalni qayta oching |
-| `skip doctor` Android SDK'ni topmaydi | Android Studio'ni bir marta ochib, SDK yuklashni tugating |
-| `Duplicate resources` (Android) | `secrets.xml` dan boshqa nusxa ham `res/values/` ichida turibdi. Faqat bittasi qolsin |
-| Talaffuzda "Tekshirish hozir ishlamayapti" | Kalit yoki server manzili yo'q, [5-qadam](#5-qadam-talaffuz-uchun-kalit-ixtiyoriy) |
-| Imlo lug'ati "Internet yo'q" deydi | Birinchi ochilishda internet kerak, keyin lug'at keshdan ishlaydi |
-| Paketlar bilan bog'liq g'alati xato | Xcode → File → Packages → Reset Package Caches, keyin ⇧⌘K va qayta ⌘R |
+| The app opens but there is no sound | Built with the `Ovozcha` scheme. Select **`Ovozcha App`** |
+| Xcode builds iOS but the Android part fails | No Android emulator is running. Start one, or use `skip app launch --ios` |
+| `skip: command not found` | `brew install skiptools/skip/skip`, then reopen the terminal |
+| `skip doctor` can't find the Android SDK | Open Android Studio once and finish the SDK download |
+| `Duplicate resources` (Android) | Another copy of `secrets.xml` sits in `res/values/`. Keep only one |
+| Pronunciation shows "Tekshirish hozir ishlamayapti" | No key or server URL, see [Step 5](#step-5-pronunciation-key-optional) |
+| Spelling dictionary says "Internet yoʻq" (no internet) | The first open needs internet; afterwards the dictionary works from the cache |
+| Strange package-related errors | Xcode → File → Packages → Reset Package Caches, then ⇧⌘K and ⌘R again |
 
 ---
 
-## Litsenziyalar va manbalar
+## Licenses and sources
 
-- **Andika** va **Poppins** shriftlari: SIL Open Font License
-  (`Sources/Ovozcha/Resources/Fonts/` dagi `OFL*.txt`).
-- **Imlo lug'ati**: [uz-hunspell](https://github.com/u2b3k/uz-hunspell) (GPL-3.0,
-  © Alisher Jalolov, Bilolbek Normoʻminov). Lug'at repozitoriyda yo'q: ilova uni ishlayotganda
-  jsDelivr CDN dan yuklaydi.
+- **Andika** and **Poppins** fonts: SIL Open Font License
+  (`OFL*.txt` in `Sources/Ovozcha/Resources/Fonts/`).
+- **Spelling dictionary**: [uz-hunspell](https://github.com/u2b3k/uz-hunspell) (GPL-3.0,
+  © Alisher Jalolov, Bilolbek Normoʻminov). The dictionary is not in this repository: the app
+  downloads it at runtime from the jsDelivr CDN.
 - **Skip**: [skip.dev](https://skip.dev).
