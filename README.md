@@ -282,7 +282,7 @@ git tag v0.0.2
 git push origin v0.0.2
 ```
 
-The workflow creates the release (as a pre-release) and uploads the files in about 15–20
+The workflow creates the release (as a pre-release) and uploads the files in about 30
 minutes. To rebuild the files of an existing release: Actions → **Release** → **Run workflow**
 and enter its tag.
 
