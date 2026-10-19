@@ -206,6 +206,56 @@ To undo: `git update-index --no-skip-worktree Darwin/Info.plist`.
 
 ---
 
+## Release build (export)
+
+To produce release files for both platforms at once, run from the repository root:
+
+```bash
+skip export --release -d .build/Android/
+```
+
+This builds the Swift package, archives the iOS app and assembles the Android app. It takes
+about 5 minutes. When it finishes, `.build/Android/` contains:
+
+| File | What it is |
+|---|---|
+| `Ovozcha-release.apk` | Android app, installable on a phone or emulator |
+| `Ovozcha-release.aab` | Android App Bundle for uploading to Google Play |
+| `Ovozcha-release.ipa` | iOS app (unsigned, see below) |
+| `Ovozcha-release.xcarchive.zip` | iOS Xcode archive |
+| `Ovozcha-project.zip` | Source snapshot of the exported Gradle project |
+
+Open the folder in Finder:
+
+```bash
+open .build/Android/
+```
+
+**Installing the APK.** An `.apk` is not a program you can run from the terminal (that gives
+`permission denied`). Install it on a running emulator or a USB-connected phone:
+
+```bash
+adb install -r .build/Android/Ovozcha-release.apk
+```
+
+You can also copy the file to an Android phone and open it there (the phone must allow
+installing apps from unknown sources).
+
+**Signing.**
+
+- **Android:** without a keystore the APK and AAB are signed with the local *debug* key. That
+  is fine for testing but Google Play rejects it. For a store release, create
+  `Android/app/keystore.properties` (it is in `.gitignore`); see
+  [Skip: export signing](https://skip.dev/docs/deployment/#export-signing). If `adb install`
+  fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`, the installed app was signed with a different
+  key: uninstall it first (`adb uninstall com.stardustdeveloper.Ovozcha`).
+- **iOS:** the `.ipa` is **not signed** (`CODE_SIGNING_REQUIRED = NO` in
+  `Darwin/Ovozcha.xcconfig`), so it cannot be installed on an iPhone as is. For TestFlight or
+  the App Store, archive from Xcode instead: select `Ovozcha App` → **Any iOS Device** →
+  Product → **Archive**, with your Team set (see [Step 3](#on-a-real-iphone)).
+
+---
+
 ## Project structure
 
 ```
