@@ -110,9 +110,9 @@ o'chiq, ekranda "Tekshirish hozir ishlamayapti" chiqadi. Android'da ishlaydi.
 
 ## 8. Loyiha xavfsizligi
 
-- [ ] **Loyiha git'da emas.** O'zgarishlar tarixi yo'q, xato kiritilsa orqaga qaytarib bo'lmaydi.
-      Git repozitoriy yaratishni tavsiya qilaman (`secrets.xml` allaqachon `.gitignore` da).
-      Xohlasangiz, men sozlab beraman.
+- [x] Loyiha git'da va GitHub'da: [github.com/Sunnatbek077/Ovozcha](https://github.com/Sunnatbek077/Ovozcha) (public).
+- [ ] Repo ochiq: kalitni hech qachon commit qilmang. `Darwin/Info.plist` ga kalit yozsangiz,
+      README'dagi 5-qadamni bajaring (`git update-index --skip-worktree`).
 
 ---
 
@@ -124,4 +124,4 @@ Bular sizni kutmaydi — "davom et" desangiz, bajaraman:
   lekin to'plam kompilyatsiya bo'lmaydi: ilova kodi macOS'da qurilmaydi.
 - **Harflar ekranini tezlashtirish.** Oldingi urinish natija bermagan; tab almashish o'lchovlari
   ham juda tarqoq. Buni haqiqiy telefonda release build'da o'lchash kerak.
-- **Proksi server** (6-bo'lim) va **git sozlash** (8-bo'lim).
+- **Proksi server** (6-bo'lim).
