@@ -254,6 +254,41 @@ installing apps from unknown sources).
   the App Store, archive from Xcode instead: select `Ovozcha App` → **Any iOS Device** →
   Product → **Archive**, with your Team set (see [Step 3](#on-a-real-iphone)).
 
+> A local export includes whatever key is in your `secrets.xml`. Don't share files exported this
+> way; publish releases through GitHub Actions (below) instead.
+
+### Automated release (GitHub Actions)
+
+[`.github/workflows/release.yml`](.github/workflows/release.yml) builds the same three files on a
+GitHub macOS runner and attaches them to a GitHub release, with the Groq key taken from a
+repository secret. The key never appears in the repository, but it **is** inside the published
+APK/AAB/IPA and can be extracted from them, so use a dedicated key with usage limits.
+
+One-time setup: add the key as a repository secret named `GROQ_API_KEY`
+(GitHub → Settings → Secrets and variables → Actions → New repository secret), or:
+
+```bash
+gh secret set GROQ_API_KEY --repo Sunnatbek077/Ovozcha
+```
+
+The command prompts for the value. To publish a new version, bump `MARKETING_VERSION` in
+`Skip.env`, commit, then push a tag:
+
+```bash
+git tag v0.0.2
+```
+
+```bash
+git push origin v0.0.2
+```
+
+The workflow creates the release (as a pre-release) and uploads the files in about 15–20
+minutes. To rebuild the files of an existing release: Actions → **Release** → **Run workflow**
+and enter its tag.
+
+Each runner signs Android builds with a fresh debug key, so installing a newer release over an
+older one fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`; uninstall the old app first.
+
 ---
 
 ## Project structure

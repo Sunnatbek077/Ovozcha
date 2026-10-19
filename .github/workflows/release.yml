@@ -1,0 +1,76 @@
+# Builds the release APK, AAB and IPA and attaches them to a GitHub release.
+#
+# The Groq API key comes from the GROQ_API_KEY repository secret and is written into the build
+# only on the runner; it never appears in the repository. Note that the key IS inside the
+# resulting APK/AAB/IPA and can be extracted from them.
+#
+# Runs when a `v*` tag is pushed, or manually (Actions → Release → Run workflow) for an
+# existing tag to rebuild its files.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to build (e.g. v0.0.1)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: macos-26
+    timeout-minutes: 60
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+
+      - name: Check API key secret
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          if [ -z "$GROQ_API_KEY" ]; then
+            echo "::error::Repository secret GROQ_API_KEY is not set (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+
+      - name: Install Skip
+        run: |
+          brew install skiptools/skip/skip
+          skip version
+
+      - name: Write API key into the build
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          # Android: res/values/secrets.xml (gitignored locally).
+          printf '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n    <string name="OvozchaGroqKey">%s</string>\n</resources>\n' \
+            "$GROQ_API_KEY" > Android/app/src/main/res/values/secrets.xml
+          # iOS: Info.plist (only on the runner, never committed).
+          /usr/libexec/PlistBuddy -c "Add :OvozchaGroqKey string $GROQ_API_KEY" Darwin/Info.plist
+
+      - name: Export release builds
+        run: skip export --release -d export/
+
+      - name: Upload to GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --title "Ovozcha ${TAG#v}" --generate-notes --prerelease
+          fi
+          gh release upload "$TAG" \
+            export/Ovozcha-release.apk \
+            export/Ovozcha-release.aab \
+            export/Ovozcha-release.ipa \
+            --clobber
