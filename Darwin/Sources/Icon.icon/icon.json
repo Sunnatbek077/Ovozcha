@@ -1,0 +1,180 @@
+{
+  "features" : [
+    "refractivity"
+  ],
+  "fill" : "automatic",
+  "groups" : [
+    {
+      "blur-material-specializations" : [
+        {
+          "appearance" : "dark",
+          "value" : null
+        }
+      ],
+      "hidden" : false,
+      "layers" : [
+        {
+          "image-name" : "23-til.svg",
+          "name" : "23-til"
+        },
+        {
+          "image-name" : "22-ogiz.svg",
+          "name" : "22-ogiz"
+        },
+        {
+          "image-name" : "21-kozlar.svg",
+          "name" : "21-kozlar"
+        },
+        {
+          "image-name" : "20-yonoq.svg",
+          "name" : "20-yonoq"
+        },
+        {
+          "image-name" : "13-tugun.svg",
+          "name" : "13-tugun"
+        },
+        {
+          "image-name" : "12-quloq-ong.svg",
+          "name" : "12-quloq-ong"
+        },
+        {
+          "image-name" : "11-quloq-chap.svg",
+          "name" : "11-quloq-chap"
+        },
+        {
+          "image-name" : "10-tana.svg",
+          "name" : "10-tana"
+        },
+        {
+          "image-name" : "00-fon.svg",
+          "name" : "00-fon"
+        }
+      ],
+      "name" : "Light Mode",
+      "refractivity-specializations" : [
+        {
+          "appearance" : "dark",
+          "value" : {
+            "depth" : 1,
+            "enabled" : true,
+            "strength" : 1
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    },
+    {
+      "hidden" : false,
+      "layers" : [
+        {
+          "image-name" : "23-til 2.svg",
+          "name" : "23-til 2"
+        },
+        {
+          "image-name" : "22-ogiz 2.svg",
+          "name" : "22-ogiz 2"
+        },
+        {
+          "image-name" : "21-kozlar 2.svg",
+          "name" : "21-kozlar 2"
+        },
+        {
+          "image-name" : "20-yonoq 2.svg",
+          "name" : "20-yonoq 2"
+        },
+        {
+          "image-name" : "13-tugun 2.svg",
+          "name" : "13-tugun 2"
+        },
+        {
+          "image-name" : "12-quloq-ong 2.svg",
+          "name" : "12-quloq-ong 2"
+        },
+        {
+          "image-name" : "11-quloq-chap 2.svg",
+          "name" : "11-quloq-chap 2"
+        },
+        {
+          "image-name" : "10-tana 2.svg",
+          "name" : "10-tana 2"
+        },
+        {
+          "image-name" : "00-fon 2.svg",
+          "name" : "00-fon 2"
+        }
+      ],
+      "name" : "Dark Mode",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    },
+    {
+      "hidden" : false,
+      "layers" : [
+        {
+          "image-name" : "23-til 3.svg",
+          "name" : "23-til 3"
+        },
+        {
+          "image-name" : "22-ogiz 3.svg",
+          "name" : "22-ogiz 3"
+        },
+        {
+          "image-name" : "21-kozlar 3.svg",
+          "name" : "21-kozlar 3"
+        },
+        {
+          "image-name" : "20-yonoq 3.svg",
+          "name" : "20-yonoq 3"
+        },
+        {
+          "image-name" : "13-tugun 3.svg",
+          "name" : "13-tugun 3"
+        },
+        {
+          "image-name" : "12-quloq-ong 3.svg",
+          "name" : "12-quloq-ong 3"
+        },
+        {
+          "image-name" : "11-quloq-chap 3.svg",
+          "name" : "11-quloq-chap 3"
+        },
+        {
+          "image-name" : "10-tana 3.svg",
+          "name" : "10-tana 3"
+        },
+        {
+          "image-name" : "00-fon 3.svg",
+          "name" : "00-fon 3"
+        }
+      ],
+      "name" : "mono",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

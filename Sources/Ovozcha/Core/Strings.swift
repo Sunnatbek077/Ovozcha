@@ -57,6 +57,33 @@ enum Strings {
         static let pronunciationSubtitle  = "AI nutq tahlili"
     }
 
+    /// Dam olish tizimi: 15 daqiqada savol, 25 daqiqada majburiy dam.
+    enum BreakCoach {
+        static let checkInTitle = "Yana shugʻullanasizmi?"
+        static let yes          = "Ha"
+        static let moreTitle    = "Koʻproq mashq qilamizmi?"
+
+        /// Dam tartibi bo'yicha xabar: 1-dam, 2-dam, 3-dam va undan keyingilari.
+        static func restMessage(forBreak number: Int) -> String {
+            if number <= 1 {
+                return "Koʻzingizga ozroq dam beramiz"
+            }
+            if number == 2 {
+                return "Koʻzingiz toliqdi, 2 daqiqa dam oling"
+            }
+            return "Juda yaxshi ketyapsiz, dam olish yodingizdan chiqmasin"
+        }
+
+        /// Sanagich: "1:05".
+        static func clock(_ seconds: Int) -> String {
+            let safe = max(seconds, 0)
+            let minutes = safe / 60
+            let rest = safe % 60
+            let tail = rest < 10 ? "0\(rest)" : "\(rest)"
+            return "\(minutes):" + tail
+        }
+    }
+
     enum Mode {
         static let offline              = "Offline"
         static let online               = "Online"
