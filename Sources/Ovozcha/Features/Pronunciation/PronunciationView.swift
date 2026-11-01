@@ -44,7 +44,7 @@ struct PronunciationView: View {
 
 // MARK: - Harflar to'ri
 
-/// 29 ta tovush darsi, alifbo tartibida. Har kartada bajarilgan mashqlar.
+/// 28 ta tovush darsi, alifbo tartibida. Har kartada bajarilgan mashqlar.
 struct PronunciationHomeView: View {
     @Environment(PronunciationProgressStore.self) private var progress
     /// Android: dars tanlanganda (iOS'da `NavigationLink`).

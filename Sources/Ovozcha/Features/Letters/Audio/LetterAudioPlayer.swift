@@ -54,7 +54,7 @@ import Observation
 /// etilmaydi va UI buni bolaga aytadi.
 ///
 /// Ataylab TTS (sintez qilingan ovoz) ishlatilmaydi: iOS'da o'zbek tili ovozi kafolatlanmagan, boshqa
-/// til ovozi esa `q`, `x`, `gʻ`, `oʻ`, `ng` kabi tovushlarni noto'g'ri o'rgatardi.
+/// til ovozi esa `q`, `x`, `ğ`, `ö` kabi tovushlarni noto'g'ri o'rgatardi.
 @MainActor
 @Observable
 final class LetterAudioPlayer {

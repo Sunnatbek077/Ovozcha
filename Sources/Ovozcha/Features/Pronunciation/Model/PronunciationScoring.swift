@@ -23,7 +23,7 @@ struct PronunciationResult: Equatable, Sendable {
 /// Talaffuzni matn asosida baholash. Tovushning o'zini tahlil qilmaydi: serverdagi nutq tanish
 /// matnni qaytaradi, biz uni kutilgan so'z bilan Levenshtein masofasi orqali solishtiramiz.
 ///
-/// Cheklov: nutq tanish bolalar ovozini va o'zbekcha tovushlarni (`q`, `x`, `gʻ`, `oʻ`, `ng`)
+/// Cheklov: nutq tanish bolalar ovozini va o'zbekcha tovushlarni (`q`, `x`, `ğ`, `ö`, `ng`)
 /// yaxshi tanimasa, to'g'ri aytilgan so'z ham "deyarli to'g'ri" deb chiqishi mumkin.
 enum PronunciationScoring {
 
@@ -72,8 +72,15 @@ enum PronunciationScoring {
         "ў": "o'", "қ": "q", "ғ": "g'", "ҳ": "h"
     ]
 
+    /// Yangi alifbo harflari (2026): `ö`, `ğ`, `ş`, `ç` -> ichki normallashtirilgan shakl
+    /// (`o'`, `g'`, `sh`, `ch`). Shunda ilovaning butun ichki mantiqi (tovushlarga bo'lish,
+    /// ovoz fayllari nomi, lug'at kaliti) eski va yangi yozuvda bir xil ishlaydi.
+    private static let modernToCanonical: [Character: String] = [
+        "\u{00F6}": "o'", "\u{011F}": "g'", "\u{015F}": "sh", "\u{00E7}": "ch"
+    ]
+
     /// Kichik harf, apostroflar bitta belgiga (`'`), tinish belgilari olib tashlanadi,
-    /// kirill lotinga o'giriladi.
+    /// kirill va yangi alifbo harflari (`ö`, `ğ`, `ş`, `ç`) ichki lotin shakliga o'giriladi.
     static func normalize(_ text: String) -> String {
         var result = ""
         for character in text.lowercased() {
@@ -81,6 +88,8 @@ enum PronunciationScoring {
                 result = result + "'"
             } else if character.isWhitespace {
                 result = result + " "
+            } else if let canonical = modernToCanonical[character] {
+                result = result + canonical
             } else if let latin = cyrillicToLatin[character] {
                 result = result + latin
             } else if isLetterOrDigit(character) {
@@ -173,7 +182,21 @@ enum PronunciationScoring {
         if target[index] == "'" && index > 0 {
             index -= 1
         }
-        return String(target[index])
+        // Tovush ikki belgidan iborat bo'lsa ("sh", "ch", "o'", "g'"), yangi alifboda u bitta harf
+        // (ş, ç, ö, ğ): butun tovushni qaytaramiz.
+        if (target[index] == "h" && index > 0 && (target[index - 1] == "s" || target[index - 1] == "c")) {
+            index -= 1
+        }
+        var unit = String(target[index])
+        if index + 1 < n {
+            let next = target[index + 1]
+            if (target[index] == "s" || target[index] == "c") && next == "h" {
+                unit = unit + "h"
+            } else if (target[index] == "o" || target[index] == "g") && next == "'" {
+                unit = unit + "'"
+            }
+        }
+        return UzbekOrthography.modern(unit)
     }
 
     /// Server matnidagi nomzodlar: har bir so'z va hammasi birlashtirilgani ("ol ma" -> "olma").

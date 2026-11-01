@@ -27,10 +27,9 @@ struct LearningStoresModifier: ViewModifier {
         _spelling = State(initialValue: SpellingDictionaryStore())
         _audio = State(initialValue: LetterAudioPlayer())
 
-        // SINOV REJIMI: savol 5 soniyada, dam 10 soniyada (5 -> 8 -> 12 soniya).
-        // Sinab bo'lgach, quyidagi qatorni shunga almashtiring:
-        //     _breakCoach = State(initialValue: BreakCoachStore(defaults: defaults))
-        _breakCoach = State(initialValue: BreakCoachStore(defaults: defaults, timing: BreakTiming.quick))
+        // Haqiqiy jadval: 15 daqiqada savol, 25 daqiqada dam.
+        // Sinash uchun `BreakTiming.quick` (5 / 10 soniya) ishlating.
+        _breakCoach = State(initialValue: BreakCoachStore(defaults: defaults, timing: BreakTiming.standard))
     }
 
     func body(content: Content) -> some View {

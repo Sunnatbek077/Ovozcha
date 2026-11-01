@@ -95,7 +95,8 @@ final class SpellingDictionaryStore {
     }
 
     nonisolated static func cacheFile() -> URL {
-        let name = "uz_UZ-" + String(version.prefix(12)) + ".idx"
+        // "-yangi": lug'at so'zlari yangi alifboda (ö, ğ, ş, ç) saqlanadi; eski kesh tashlanadi.
+        let name = "uz_UZ-" + String(version.prefix(12)) + "-yangi.idx"
         return URL.cachesDirectory.appendingPathComponent("imlo").appendingPathComponent(name)
     }
 

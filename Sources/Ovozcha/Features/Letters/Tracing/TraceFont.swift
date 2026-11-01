@@ -5,8 +5,8 @@ import CoreText
 /// Iz chizish ko'rsatmasi uchun shrift.
 ///
 /// Andika (SIL, OFL): o'qish-yozishni endi o'rganayotgan bolalar uchun yaratilgan. Bir qavatli
-/// `a` va `g` (maktabda yoziladigan shakl) va o'zbek `ʻ` (U+02BB) belgisi bor. Poppins'da `ʻ` yo'q,
-/// shuning uchun "Oʻ" va "Gʻ" da belgi boshqa shriftdan olinardi va shakli mos kelmasdi.
+/// `a` va `g` (maktabda yoziladigan shakl) hamda yangi o'zbek alifbosining `Ö`, `Ğ`, `Ş`, `Ç`
+/// harflari bor (eski `Oʻ`, `Gʻ` dagi `ʻ` belgisi Poppins'da yo'q edi — endi bunday muammo yo'q).
 ///
 /// Interfeys matni (sarlavha, tugma) esa oldingidek Poppins'da qoladi.
 enum TraceFont {

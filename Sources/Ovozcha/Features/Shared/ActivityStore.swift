@@ -141,10 +141,10 @@ final class ActivityStore {
         case 1:  return "Ya"
         case 2:  return "Du"
         case 3:  return "Se"
-        case 4:  return "Cho"
+        case 4:  return "\u{00C7}o"
         case 5:  return "Pay"
         case 6:  return "Ju"
-        default: return "Sha"
+        default: return "\u{015E}a"
         }
     }
 

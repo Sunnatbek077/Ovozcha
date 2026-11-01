@@ -11,7 +11,7 @@ struct GlyphLayout {
     let em: CGFloat
 }
 
-/// Harf, digraf (`Sh`, `Ch`, `Ng`) yoki raqam konturini Core Text orqali oladi.
+/// Harf (`Ö`, `Ğ`, `Ş`, `Ç` ham — alohida belgi) yoki raqam konturini Core Text orqali oladi.
 ///
 /// Joylashuv bir turdagi barcha elementlar uchun bir xil: umumiy asosiy chiziq (baseline) va shrift
 /// o'lchami. Shunda `g`, `j`, `p`, `q`, `y` pastga tushadi, `b`, `d`, `h`, `k` yuqoriga chiqadi va
@@ -26,12 +26,16 @@ enum GlyphOutline {
         let baselineFraction: CGFloat
         /// Kenglik tuval kengligining shuncha ulushidan oshmaydi (oshsa, bir tekis kichraytiriladi).
         let maxWidthFraction: CGFloat
+        /// Harfning tepasi tuval tepasidan kamida shuncha (balandlik ulushida) pastda bo'lishi kerak.
+        /// Faqat ustida belgisi bor bosh harflar (`Ö`, `Ğ`) uchun ahamiyatli: ularning nuqta/yoyi
+        /// asosiy chiziq o'zgarmaganda tuvaldan chiqib ketardi. Boshqa harflarning tepasi chegaradan past.
+        let topMarginFraction: CGFloat
     }
 
     static func profile(for kind: TraceKind) -> Profile {
         switch kind {
-        case .letter: return Profile(emFraction: 0.86, baselineFraction: 0.74, maxWidthFraction: 0.86)
-        case .digit:  return Profile(emFraction: 0.80, baselineFraction: 0.79, maxWidthFraction: 0.86)
+        case .letter: return Profile(emFraction: 0.86, baselineFraction: 0.74, maxWidthFraction: 0.86, topMarginFraction: 0.04)
+        case .digit:  return Profile(emFraction: 0.80, baselineFraction: 0.79, maxWidthFraction: 0.86, topMarginFraction: 0.04)
         }
     }
 
@@ -57,8 +61,13 @@ enum GlyphOutline {
         }
 
         let maxWidth = canvas.width * profile.maxWidthFraction
-        let scale = min(1, maxWidth / bounds.width)
+        var scale = min(1, maxWidth / bounds.width)
         let baseline = canvas.height * profile.baselineFraction
+        // Core Text'da y yuqoriga: `bounds.maxY` — asosiy chiziqdan tepagacha bo'lgan balandlik.
+        let topRoom = baseline - canvas.height * profile.topMarginFraction
+        if bounds.maxY > 0 && bounds.maxY * scale > topRoom {
+            scale = topRoom / bounds.maxY
+        }
 
         var transform = CGAffineTransform.identity
         transform = transform.translatedBy(x: canvas.width / 2, y: baseline)

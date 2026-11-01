@@ -29,7 +29,7 @@ struct LettersFlowView: View {
 
 // MARK: - Harflar to'ri
 
-/// 29 ta harf: bosilsa, shu harfni yozish ekrani ochiladi. Har bir kartada ikki nuqta:
+/// 28 ta harf: bosilsa, shu harfni yozish ekrani ochiladi. Har bir kartada ikki nuqta:
 /// bosh va kichik shakl yozilganmi.
 struct LetterGridView: View {
     @Environment(LetterProgressStore.self) private var store

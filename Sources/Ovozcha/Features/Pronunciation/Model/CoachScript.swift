@@ -4,7 +4,7 @@ import Foundation
 ///
 /// Ovoz jonli yozuvlardan yig'iladi (TTS emas): masalan
 /// `word_rasm` + `coach_pos_start` + `letter_r` + `coach_instead_of` + `letter_l` + `coach_i_heard`
-/// = "rasm soʻzining boshida r oʻrniga l eshitdim". Bo'laklardan biri yo'q bo'lsa,
+/// = "«rasm» sözining boşida «r» örniga «l» eşitdim". Bo'laklardan biri yo'q bo'lsa,
 /// ovoz umuman chalinmaydi (yarim gap chalkashtiradi) — faqat matn ko'rinadi.
 struct CoachLine: Equatable, Sendable {
     enum Tone: Equatable, Sendable {

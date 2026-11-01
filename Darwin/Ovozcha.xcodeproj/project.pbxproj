@@ -209,7 +209,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Ovozcha bola aytgan soʻzni yozib olib, talaffuzini tekshirish uchun mikrofondan foydalanadi.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Ovozcha bola aytgan sözni yozib olib, talaffuzini tekşiriş uçun mikrofondan foydalanadi.";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 			};
@@ -223,7 +223,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Ovozcha bola aytgan soʻzni yozib olib, talaffuzini tekshirish uchun mikrofondan foydalanadi.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Ovozcha bola aytgan sözni yozib olib, talaffuzini tekşiriş uçun mikrofondan foydalanadi.";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 			};

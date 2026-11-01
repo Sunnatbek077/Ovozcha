@@ -2,7 +2,7 @@ import Foundation
 
 /// Imlo lug'atidagi bitta so'z.
 struct SpellingEntry: Identifiable, Hashable, Sendable {
-    /// To'g'ri yozilishi: "toʻgʻri", "abadiylashtirilmoq".
+    /// To'g'ri yozilishi (yangi alifboda): "töğri", "abadiylaştirilmoq".
     let word: String
     /// Qidiruv kaliti: kichik harf, apostrof/chiziqchasiz, lotin — "togri".
     let key: String
@@ -50,7 +50,9 @@ enum SpellingIndex {
             if flags.contains("X") {
                 word = word + "moq"
             }
-            entries.append(SpellingEntry(word: word, key: key(word)))
+            // Lug'at eski yozuvda ("toʻgʻri"); ekranda yangi alifbo ("töğri"). Kalit esa ikkalasidan
+            // bir xil chiqadi ("togri"), shuning uchun qidiruv eski va yangi yozuvda ishlaydi.
+            entries.append(SpellingEntry(word: UzbekOrthography.modern(word), key: key(word)))
         }
         entries.sort { a, b in
             if a.key != b.key { return a.key < b.key }
@@ -70,7 +72,7 @@ enum SpellingIndex {
         return unique
     }
 
-    /// Qidiruv kaliti: "Toʻgʻri" / "to'g'ri" / "тўғри" / "togri" -> "togri".
+    /// Qidiruv kaliti: "Töğri" / "Toʻgʻri" / "to'g'ri" / "тўғри" / "togri" -> "togri".
     static func key(_ text: String) -> String {
         var result = ""
         for character in PronunciationScoring.normalize(text) {
@@ -184,7 +186,7 @@ enum SpellingIndex {
         let distance: Int
     }
 
-    /// Yozilgani lug'atdagi so'zning o'zimi (apostrof turi farq qilmaydi: o' = oʻ).
+    /// Yozilgani lug'atdagi so'zning o'zimi (eski va yangi yozuv farq qilmaydi: o' = oʻ = ö).
     static func isExactSpelling(_ query: String, of entry: SpellingEntry) -> Bool {
         let typed = PronunciationScoring.normalize(query).trimmingCharacters(in: .whitespaces)
         return !typed.isEmpty && typed == PronunciationScoring.normalize(entry.word)

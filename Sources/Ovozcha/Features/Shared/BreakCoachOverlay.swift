@@ -100,8 +100,10 @@ struct BreakCoachOverlay: View {
                 .ovStyle(.title)
                 .multilineTextAlignment(.center)
 
+            // Android (Skip)'da `frame(maxWidth: 560)` tugmani ekrandan kengaytirib, chapga siljitardi
+            // (`ovContentWidth` izohiga qarang): u yerda faqat to'liq kenglik beriladi.
             yesButton(action: { coach.continuePracticing() })
-                .frame(maxWidth: Theme.Layout.maxContentWidth)
+                .ovContentWidth()
 
             Spacer(minLength: 0)
         }

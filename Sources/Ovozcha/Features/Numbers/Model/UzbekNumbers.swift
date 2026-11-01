@@ -20,20 +20,18 @@ struct NumberItem: Identifiable, Hashable, Sendable {
 
 enum UzbekNumbers {
 
-    /// "toʻrt", "toʻqqiz", "oʻn" dagi belgi U+02BB (ʻ), ochiq yozilgan.
-    private static let tutuq = "\u{02BB}"
-
+    /// Sonlar yangi alifboda: "tört", "töqqiz", "ön", "beş", "uç" (Ö, Ş, Ç — ochiq yozilgan).
     static let all: [NumberItem] = [
         NumberItem(value: 1, word: "bir"),
         NumberItem(value: 2, word: "ikki"),
-        NumberItem(value: 3, word: "uch"),
-        NumberItem(value: 4, word: "to" + tutuq + "rt"),
-        NumberItem(value: 5, word: "besh"),
+        NumberItem(value: 3, word: "u\u{00E7}"),
+        NumberItem(value: 4, word: "t\u{00F6}rt"),
+        NumberItem(value: 5, word: "be\u{015F}"),
         NumberItem(value: 6, word: "olti"),
         NumberItem(value: 7, word: "yetti"),
         NumberItem(value: 8, word: "sakkiz"),
-        NumberItem(value: 9, word: "to" + tutuq + "qqiz"),
-        NumberItem(value: 10, word: "o" + tutuq + "n")
+        NumberItem(value: 9, word: "t\u{00F6}qqiz"),
+        NumberItem(value: 10, word: "\u{00F6}n")
     ]
 
     static func item(id: String) -> NumberItem? {

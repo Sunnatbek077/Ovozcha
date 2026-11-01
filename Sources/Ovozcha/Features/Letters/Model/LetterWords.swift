@@ -22,27 +22,20 @@ struct LetterWord: Identifiable, Hashable, Sendable {
     var references: [String] = []
 }
 
-/// Har bir harf uchun misol so'zlar (29 ta harf, jami 236 so'z).
+/// Har bir harf uchun misol so'zlar (28 ta harf, jami 230 so'z). So'zlar yangi alifboda yozilgan.
 ///
 /// Tanlash mezoni: bola biladigan, ko'z oldiga keltiradigan aniq narsa, va emoji so'zning
 /// ma'nosini HAQIQATAN ko'rsatishi. Mos emoji topilmagan so'zlar qo'shilmadi — noto'g'ri
 /// surat bolaga noto'g'ri bog'lanish o'rgatadi. Shuning uchun harflarda so'z soni har xil
 /// (5 tadan 10 tagacha).
 ///
-/// `Ng` hech qachon so'z boshida kelmaydi, shuning uchun unga harf ICHIDA bo'lgan so'zlar
-/// tanlangan ("tong", "qo'ng'iroq"). `LetterWords.letterMask` harfni so'zning istalgan
-/// joyida topadi.
-///
 /// DIQQAT: so'zlar va imlo o'zbek tili o'qituvchisi tomonidan tasdiqlanishi kerak.
 /// Tekshirilgani: har bir so'z o'z harfini o'z ichiga oladi va har birida emoji bor.
 enum LetterWords {
 
-    /// Tutuq belgisi (U+02BC) — "raʼno" dagi belgi.
-    /// Diqqat: bu `Oʻ`/`Gʻ` dagi belgidan (U+02BB) boshqa.
+    /// Tutuq belgisi (U+02BC) — "raʼno" dagi belgi. Yangi alifboda ham o'zgarmadi
+    /// (`Ö`, `Ğ` harflarida alohida belgi yo'q).
     private static let tutuq = "\u{02BC}"
-
-    /// `Oʻ`/`Gʻ` dagi belgi (U+02BB) — "roʻmol" dagi `oʻ` uchun.
-    private static let okina = "\u{02BB}"
 
     /// So'zni matni bo'yicha topadi (barcha harflar ichidan). Talaffuz darslari so'zlarni shu
     /// yerdan oladi — emoji va etalonlar (`references`) bitta joyda turadi.
@@ -64,7 +57,7 @@ enum LetterWords {
                 LetterWord(text: "ari",       emoji: "🐝"),
                 LetterWord(text: "ayiq",      emoji: "🐻"),
                 LetterWord(text: "asal",      emoji: "🍯"),
-                LetterWord(text: "archa",     emoji: "🌲"),
+                LetterWord(text: "arça",     emoji: "🌲"),
                 LetterWord(text: "apelsin",   emoji: "🍊"),
                 LetterWord(text: "ananas",    emoji: "🍍"),
                 LetterWord(text: "avtobus",   emoji: "🚌"),
@@ -80,7 +73,7 @@ enum LetterWords {
                 LetterWord(text: "bulut",              emoji: "☁️"),
                 LetterWord(text: "bola",               emoji: "🧒"),
                 LetterWord(text: "barg",               emoji: "🍃"),
-                LetterWord(text: "bo" + okina + "ri",  emoji: "🐺"),
+                LetterWord(text: "böri",  emoji: "🐺"),
                 LetterWord(text: "burun",              emoji: "👃"),
                 LetterWord(text: "buqa",               emoji: "🐂"),
                 LetterWord(text: "basketbol",          emoji: "🏀")
@@ -100,9 +93,9 @@ enum LetterWords {
             ]
         case "e":
             return [
-                LetterWord(text: "eshak",   emoji: "🫏"),
-                LetterWord(text: "eshik",   emoji: "🚪"),
-                LetterWord(text: "echki",   emoji: "🐐"),
+                LetterWord(text: "eşak",   emoji: "🫏"),
+                LetterWord(text: "eşik",   emoji: "🚪"),
+                LetterWord(text: "eçki",   emoji: "🐐"),
                 LetterWord(text: "etik",    emoji: "🥾"),
                 LetterWord(text: "et",      emoji: "🥩"),
                 LetterWord(text: "ertak",   emoji: "📖"),
@@ -127,13 +120,13 @@ enum LetterWords {
                 LetterWord(text: "gazeta",  emoji: "📰"),
                 LetterWord(text: "gitara",  emoji: "🎸"),
                 LetterWord(text: "globus",  emoji: "🌐"),
-                LetterWord(text: "guruch",  emoji: "🍚"),
+                LetterWord(text: "guruç",  emoji: "🍚"),
                 LetterWord(text: "gubka",   emoji: "🧽")
             ]
         case "h":
             return [
                 LetterWord(text: "hovli",     emoji: "🏡"),
-                LetterWord(text: "hasharot",  emoji: "🐛"),
+                LetterWord(text: "haşarot",  emoji: "🐛"),
                 LetterWord(text: "hamyon",    emoji: "👛"),
                 LetterWord(text: "handalak",  emoji: "🍈"),
                 LetterWord(text: "hujjat",    emoji: "📄"),
@@ -145,7 +138,7 @@ enum LetterWords {
                 LetterWord(text: "ilon",    emoji: "🐍"),
                 LetterWord(text: "it",      emoji: "🐕"),
                 LetterWord(text: "igna",    emoji: "🪡"),
-                LetterWord(text: "idish",   emoji: "🍽️"),
+                LetterWord(text: "idiş",   emoji: "🍽️"),
                 LetterWord(text: "ip",      emoji: "🧵"),
                 LetterWord(text: "imorat",  emoji: "🏢"),
                 LetterWord(text: "inson",   emoji: "🧑"),
@@ -154,7 +147,7 @@ enum LetterWords {
         case "j":
             return [
                 LetterWord(text: "jiraf",              emoji: "🦒"),
-                LetterWord(text: "jo" + okina + "ja",  emoji: "🐤"),
+                LetterWord(text: "jöja",  emoji: "🐤"),
                 LetterWord(text: "jun",                emoji: "🧶"),
                 LetterWord(text: "jurnal",             emoji: "📔"),
                 LetterWord(text: "jamoa",              emoji: "👥"),
@@ -168,10 +161,10 @@ enum LetterWords {
                 LetterWord(text: "kema",       emoji: "🚢"),
                 LetterWord(text: "kiyik",      emoji: "🦌"),
                 LetterWord(text: "koptok",     emoji: "⚽"),
-                LetterWord(text: "kuchuk",     emoji: "🐶"),
-                LetterWord(text: "kartoshka",  emoji: "🥔"),
+                LetterWord(text: "kuçuk",     emoji: "🐶"),
+                LetterWord(text: "kartoşka",  emoji: "🥔"),
                 LetterWord(text: "karam",      emoji: "🥬"),
-                LetterWord(text: "kalamush",   emoji: "🐭")
+                LetterWord(text: "kalamuş",   emoji: "🐭")
             ]
         case "l":
             return [
@@ -184,13 +177,13 @@ enum LetterWords {
             ]
         case "m":
             return [
-                LetterWord(text: "mushuk",                    emoji: "🐱"),
+                LetterWord(text: "muşuk",                    emoji: "🐱"),
                 LetterWord(text: "maymun",                    emoji: "🐵"),
-                LetterWord(text: "mashina",                   emoji: "🚗"),
+                LetterWord(text: "maşina",                   emoji: "🚗"),
                 LetterWord(text: "meva",                      emoji: "🍏"),
                 LetterWord(text: "muz",                       emoji: "🧊"),
                 LetterWord(text: "mikroskop",                 emoji: "🔬"),
-                LetterWord(text: "makkajo" + okina + "xori",  emoji: "🌽"),
+                LetterWord(text: "makkajöxori",  emoji: "🌽"),
                 LetterWord(text: "muzqaymoq",                 emoji: "🍦"),
                 LetterWord(text: "masjid",                    emoji: "🕌"),
                 LetterWord(text: "mix",                       emoji: "🔩")
@@ -201,7 +194,7 @@ enum LetterWords {
                 LetterWord(text: "nok",       emoji: "🍐"),
                 LetterWord(text: "nay",       emoji: "🪈"),
                 LetterWord(text: "nur",       emoji: "☀️"),
-                LetterWord(text: "nonushta",  emoji: "🍳"),
+                LetterWord(text: "nonuşta",  emoji: "🍳"),
                 LetterWord(text: "noutbuk",   emoji: "💻")
             ]
         case "o":
@@ -210,12 +203,12 @@ enum LetterWords {
                 LetterWord(text: "oy",       emoji: "🌙"),
                 LetterWord(text: "ot",       emoji: "🐴"),
                 LetterWord(text: "ona",      emoji: "👩"),
-                LetterWord(text: "oshxona",  emoji: "🍳"),
+                LetterWord(text: "oşxona",  emoji: "🍳"),
                 LetterWord(text: "olov",     emoji: "🔥"),
                 LetterWord(text: "oyna",     emoji: "🪞"),
                 LetterWord(text: "oltin",    emoji: "🥇"),
-                LetterWord(text: "oqqush",   emoji: "🦢"),
-                LetterWord(text: "olcha",    emoji: "🍒")
+                LetterWord(text: "oqquş",   emoji: "🦢"),
+                LetterWord(text: "olça",    emoji: "🍒")
             ]
         case "p":
             return [
@@ -224,7 +217,7 @@ enum LetterWords {
                 LetterWord(text: "poyabzal",  emoji: "👟"),
                 LetterWord(text: "palto",     emoji: "🧥"),
                 LetterWord(text: "paypoq",    emoji: "🧦"),
-                LetterWord(text: "pishloq",   emoji: "🧀"),
+                LetterWord(text: "pişloq",   emoji: "🧀"),
                 LetterWord(text: "poyezd",    emoji: "🚂"),
                 LetterWord(text: "pul",       emoji: "💵"),
                 LetterWord(text: "palma",     emoji: "🌴"),
@@ -233,12 +226,12 @@ enum LetterWords {
         case "q":
             return [
                 LetterWord(text: "qalam",             emoji: "✏️"),
-                LetterWord(text: "quyosh",            emoji: "☀️"),
+                LetterWord(text: "quyoş",            emoji: "☀️"),
                 LetterWord(text: "qor",               emoji: "❄️"),
-                LetterWord(text: "qush",              emoji: "🐦"),
-                LetterWord(text: "qo" + okina + "y",  emoji: "🐑"),
+                LetterWord(text: "quş",              emoji: "🐦"),
+                LetterWord(text: "qöy",  emoji: "🐑"),
                 LetterWord(text: "qozon",             emoji: "🍲"),
-                LetterWord(text: "qaychi",            emoji: "✂️"),
+                LetterWord(text: "qayçi",            emoji: "✂️"),
                 LetterWord(text: "qulf",              emoji: "🔒"),
                 LetterWord(text: "qovun",             emoji: "🍈"),
                 LetterWord(text: "qulupnay",          emoji: "🍓")
@@ -253,8 +246,8 @@ enum LetterWords {
                 LetterWord(text: "raqs",                 emoji: "💃"),
                 LetterWord(text: "robot",                emoji: "🤖"),
                 LetterWord(text: "raketa",               emoji: "🚀"),
-                LetterWord(text: "ruchka",               emoji: "🖊️"),
-                LetterWord(text: "ro" + okina + "mol",   emoji: "🧕")
+                LetterWord(text: "ruçka",               emoji: "🖊️"),
+                LetterWord(text: "römol",   emoji: "🧕")
             ]
         case "s":
             return [
@@ -264,7 +257,7 @@ enum LetterWords {
                 LetterWord(text: "sigir",     emoji: "🐄"),
                 LetterWord(text: "suv",       emoji: "💧"),
                 LetterWord(text: "sut",       emoji: "🥛"),
-                LetterWord(text: "sichqon",   emoji: "🐭"),
+                LetterWord(text: "siçqon",   emoji: "🐭"),
                 LetterWord(text: "stul",      emoji: "🪑"),
                 LetterWord(text: "sumka",     emoji: "👜"),
                 LetterWord(text: "sovun",     emoji: "🧼")
@@ -274,13 +267,13 @@ enum LetterWords {
                 LetterWord(text: "tulki",        emoji: "🦊"),
                 LetterWord(text: "tovuq",        emoji: "🐔"),
                 LetterWord(text: "tarvuz",       emoji: "🍉"),
-                LetterWord(text: "tish",         emoji: "🦷"),
+                LetterWord(text: "tiş",         emoji: "🦷"),
                 LetterWord(text: "tuz",          emoji: "🧂"),
                 LetterWord(text: "telefon",      emoji: "📱"),
                 LetterWord(text: "televizor",    emoji: "📺"),
                 LetterWord(text: "tuya",         emoji: "🐫"),
-                LetterWord(text: "tog" + okina,  emoji: "⛰️"),
-                LetterWord(text: "tomchi",       emoji: "💧")
+                LetterWord(text: "toğ",  emoji: "⛰️"),
+                LetterWord(text: "tomçi",       emoji: "💧")
             ]
         case "u":
             return [
@@ -289,7 +282,7 @@ enum LetterWords {
                 LetterWord(text: "ukki",        emoji: "🦉"),
                 LetterWord(text: "uzuk",        emoji: "💍"),
                 LetterWord(text: "usta",        emoji: "🔧"),
-                LetterWord(text: "uchburchak",  emoji: "🔺")
+                LetterWord(text: "uçburçak",  emoji: "🔺")
             ]
         case "v":
             return [
@@ -302,7 +295,7 @@ enum LetterWords {
             ]
         case "x":
             return [
-                LetterWord(text: "xo" + okina + "roz",  emoji: "🐓"),
+                LetterWord(text: "xöroz",  emoji: "🐓"),
                 LetterWord(text: "xat",                 emoji: "✉️"),
                 LetterWord(text: "xarita",              emoji: "🗺️"),
                 LetterWord(text: "xalta",               emoji: "🛍️"),
@@ -311,11 +304,11 @@ enum LetterWords {
         case "y":
             return [
                 LetterWord(text: "yulduz",               emoji: "⭐"),
-                LetterWord(text: "yomg" + okina + "ir",  emoji: "🌧️"),
+                LetterWord(text: "yomğir",  emoji: "🌧️"),
                 LetterWord(text: "yurak",                emoji: "❤️"),
                 LetterWord(text: "yaproq",               emoji: "🍂"),
-                LetterWord(text: "yong" + okina + "oq",  emoji: "🌰"),
-                LetterWord(text: "yo" + okina + "l",     emoji: "🛣️"),
+                LetterWord(text: "yonğoq",  emoji: "🌰"),
+                LetterWord(text: "yöl",     emoji: "🛣️"),
                 LetterWord(text: "yer",                  emoji: "🌍"),
                 LetterWord(text: "yoz",                  emoji: "☀️")
             ]
@@ -329,58 +322,49 @@ enum LetterWords {
             ]
         case "o_apos":
             return [
-                LetterWord(text: "o" + okina + "rdak",              emoji: "🦆"),
-                LetterWord(text: "o" + okina + "rmon",              emoji: "🌲"),
-                LetterWord(text: "o" + okina + "tin",               emoji: "🪵"),
-                LetterWord(text: "o" + okina + "rgimchak",          emoji: "🕷️"),
-                LetterWord(text: "o" + okina + "g" + okina + "il",  emoji: "👦"),
-                LetterWord(text: "o" + okina + "simlik",            emoji: "🌱"),
-                LetterWord(text: "o" + okina + "t",                 emoji: "🌿")
+                LetterWord(text: "ördak",              emoji: "🦆"),
+                LetterWord(text: "örmon",              emoji: "🌲"),
+                LetterWord(text: "ötin",               emoji: "🪵"),
+                LetterWord(text: "örgimçak",          emoji: "🕷️"),
+                LetterWord(text: "öğil",  emoji: "👦"),
+                LetterWord(text: "ösimlik",            emoji: "🌱"),
+                LetterWord(text: "öt",                 emoji: "🌿")
             ]
         case "g_apos":
             return [
-                LetterWord(text: "g" + okina + "oz",       emoji: "🪿"),
-                LetterWord(text: "g" + okina + "ildirak",  emoji: "🛞"),
-                LetterWord(text: "g" + okina + "or",       emoji: "🕳️"),
-                LetterWord(text: "g" + okina + "isht",     emoji: "🧱"),
-                LetterWord(text: "bog" + okina,            emoji: "🌳"),
-                LetterWord(text: "tog" + okina,            emoji: "⛰️"),
-                LetterWord(text: "yog" + okina,            emoji: "🧈")
+                LetterWord(text: "ğoz",       emoji: "🪿"),
+                LetterWord(text: "ğildirak",  emoji: "🛞"),
+                LetterWord(text: "ğor",       emoji: "🕳️"),
+                LetterWord(text: "ğişt",     emoji: "🧱"),
+                LetterWord(text: "boğ",            emoji: "🌳"),
+                LetterWord(text: "toğ",            emoji: "⛰️"),
+                LetterWord(text: "yoğ",            emoji: "🧈")
             ]
         case "sh":
             return [
-                LetterWord(text: "shar",                  emoji: "🎈"),
-                LetterWord(text: "shakar",                emoji: "🍬"),
-                LetterWord(text: "shamol",                emoji: "🌬️"),
-                LetterWord(text: "shaftoli",              emoji: "🍑"),
-                LetterWord(text: "shim",                  emoji: "👖"),
-                LetterWord(text: "shokolad",              emoji: "🍫"),
-                LetterWord(text: "shahar",                emoji: "🏙️"),
-                LetterWord(text: "shisha",                emoji: "🍾"),
-                LetterWord(text: "shlyapa",               emoji: "👒"),
-                LetterWord(text: "sholg" + okina + "om",  emoji: "🥬")
+                LetterWord(text: "şar",                  emoji: "🎈"),
+                LetterWord(text: "şakar",                emoji: "🍬"),
+                LetterWord(text: "şamol",                emoji: "🌬️"),
+                LetterWord(text: "şaftoli",              emoji: "🍑"),
+                LetterWord(text: "şim",                  emoji: "👖"),
+                LetterWord(text: "şokolad",              emoji: "🍫"),
+                LetterWord(text: "şahar",                emoji: "🏙️"),
+                LetterWord(text: "şişa",                emoji: "🍾"),
+                LetterWord(text: "şlyapa",               emoji: "👒"),
+                LetterWord(text: "şolğom",  emoji: "🥬")
             ]
         case "ch":
             return [
-                LetterWord(text: "choy",                   emoji: "🍵"),
-                LetterWord(text: "chelak",                 emoji: "🪣"),
-                LetterWord(text: "chumoli",                emoji: "🐜"),
-                LetterWord(text: "chivin",                 emoji: "🦟"),
-                LetterWord(text: "chaqmoq",                emoji: "⚡"),
-                LetterWord(text: "chiroq",                 emoji: "💡"),
-                LetterWord(text: "chana",                  emoji: "🛷"),
-                LetterWord(text: "chipta",                 emoji: "🎫"),
-                LetterWord(text: "chizg" + okina + "ich",  emoji: "📏"),
-                LetterWord(text: "cho" + okina + "tka",    emoji: "🪥")
-            ]
-        case "ng":
-            return [
-                LetterWord(text: "tong",                                emoji: "🌅"),
-                LetterWord(text: "bodring",                              emoji: "🥒"),
-                LetterWord(text: "ohang",                               emoji: "🎵"),
-                LetterWord(text: "singil",                              emoji: "👧"),
-                LetterWord(text: "ming",                                emoji: "🔢"),
-                LetterWord(text: "rang",                                emoji: "🎨")
+                LetterWord(text: "çoy",                   emoji: "🍵"),
+                LetterWord(text: "çelak",                 emoji: "🪣"),
+                LetterWord(text: "çumoli",                emoji: "🐜"),
+                LetterWord(text: "çivin",                 emoji: "🦟"),
+                LetterWord(text: "çaqmoq",                emoji: "⚡"),
+                LetterWord(text: "çiroq",                 emoji: "💡"),
+                LetterWord(text: "çana",                  emoji: "🛷"),
+                LetterWord(text: "çipta",                 emoji: "🎫"),
+                LetterWord(text: "çizğiç",  emoji: "📏"),
+                LetterWord(text: "çötka",    emoji: "🪥")
             ]
         default:
             return []
@@ -390,8 +374,8 @@ enum LetterWords {
     /// So'zdagi qaysi belgilar shu harfga tegishli ekanini belgilaydi.
     ///
     /// Bu bolaga harf so'zning qayerida turganini ko'rsatadi — "arra" da o'rtada,
-    /// "raketa" da boshida. Ko'p belgili harflar (`Sh`, `Ch`, `Ng`, `Oʻ`, `Gʻ`) ham
-    /// to'g'ri ishlaydi, chunki moslik belgilab-belgilab tekshiriladi.
+    /// "raketa" da boshida. Yangi alifboda hamma harf bitta belgi (`Ö`, `Ğ`, `Ş`, `Ç` ham), shuning
+    /// uchun `g` harfi "toğ" dagi `ğ` ni, `s` harfi "şar" dagi `ş` ni belgilamaydi.
     ///
     /// Qaytadigan massiv uzunligi so'zdagi belgilar soniga teng.
     static func letterMask(word: String, letter: String) -> [Bool] {

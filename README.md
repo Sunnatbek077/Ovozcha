@@ -161,7 +161,7 @@ every build.
 ## Step 5. Pronunciation key (optional)
 
 The app runs fully without a key. The key is only needed for the **pronunciation coach** to check
-the word the child said. Without it the screen shows "Tekshirish hozir ishlamayapti" ("Checking
+the word the child said. Without it the screen shows "Tekşiriş hozir işlamayapti" ("Checking
 is not available right now"); every other section works normally.
 
 Speech is converted to text via [Groq](https://console.groq.com) (Whisper model). There are two
@@ -291,6 +291,37 @@ older one fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`; uninstall the old app
 
 ---
 
+## Alphabet (new Uzbek Latin alphabet)
+
+The app uses the Uzbek Latin alphabet as amended by Law O‘RQ-1184 of 21 October 2026 (28 letters
+plus the tutuq sign ʼ):
+
+| Old | New | Letter `id` (unchanged) |
+|---|---|---|
+| Oʻ oʻ | Ö ö | `o_apos` |
+| Gʻ gʻ | Ğ ğ | `g_apos` |
+| Sh sh | Ş ş | `sh` |
+| Ch ch | Ç ç | `ch` |
+| Ng ng | not a letter any more (n + g) | removed |
+
+Things to know when changing text or words:
+
+- All user-visible text and the example words (`Strings.swift`, `LetterWords.swift`,
+  `UzbekNumbers.swift`) are written in the new alphabet.
+- Letter `id`s, audio file names (`letter_o_apos`, `word_o_rdak`, …) and saved progress did **not**
+  change, so existing recordings and user data keep working.
+- Internally, speech scoring and the spelling dictionary work on a normalized ASCII form
+  (`o'`, `g'`, `sh`, `ch`). `PronunciationScoring.normalize` maps `ö ğ ş ç` to it, so both old and
+  new spelling are understood. `UzbekOrthography.modern(_:)` goes the other way: it shows old-style
+  text (speech-recognition output, the downloaded uz-hunspell dictionary, saved activity history)
+  in the new alphabet.
+- `GlyphTable.swift` (Android tracing outlines) is generated. The `o_apos`, `g_apos`, `sh` and `ch`
+  entries were regenerated from Andika-Bold for Ö, Ğ, Ş, Ç, and `ng` was removed. Capital `Ö` and `Ğ`
+  are scaled down slightly so the dots/breve fit on the canvas (same rule in `GlyphOutline.swift` for iOS).
+- Old voice files for `ng` (`sound_ng`, `syl_ng_closed`) are no longer used and can be deleted.
+
+---
+
 ## Project structure
 
 ```
@@ -300,7 +331,8 @@ Ovozcha/
 ├── Project.xcworkspace        Open this in Xcode
 ├── Sources/Ovozcha/           ALL app code: one codebase for iOS and Android
 │   ├── App/                   Tab bar, navigation
-│   ├── Core/                  UI strings (Strings.swift), config, networking
+│   ├── Core/                  UI strings (Strings.swift), old→new alphabet helper
+│   │                          (UzbekOrthography.swift), config, networking
 │   ├── DesignSystem/          Colors, fonts, shared modifiers
 │   ├── Features/              Screens: Home, Letters, Numbers, Pronunciation,
 │   │                          Spelling, Parent, Setup, Shared
@@ -344,8 +376,8 @@ task in [`VAZIFALAR.md`](VAZIFALAR.md).
 | `skip: command not found` | `brew install skiptools/skip/skip`, then reopen the terminal |
 | `skip doctor` can't find the Android SDK | Open Android Studio once and finish the SDK download |
 | `Duplicate resources` (Android) | Another copy of `secrets.xml` sits in `res/values/`. Keep only one |
-| Pronunciation shows "Tekshirish hozir ishlamayapti" | No key or server URL, see [Step 5](#step-5-pronunciation-key-optional) |
-| Spelling dictionary says "Internet yoʻq" (no internet) | The first open needs internet; afterwards the dictionary works from the cache |
+| Pronunciation shows "Tekşiriş hozir işlamayapti" | No key or server URL, see [Step 5](#step-5-pronunciation-key-optional) |
+| Spelling dictionary says "Internet yöq" (no internet) | The first open needs internet; afterwards the dictionary works from the cache |
 | Strange package-related errors | Xcode → File → Packages → Reset Package Caches, then ⇧⌘K and ⌘R again |
 
 ---

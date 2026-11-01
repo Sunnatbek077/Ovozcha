@@ -52,16 +52,16 @@ struct LessonStage: Identifiable, Hashable, Sendable {
 /// Bitta tovush darsi. Logopediya tartibida: tovushning o'zi -> uni farqlash (quloq) ->
 /// so'z boshida -> o'rtasida -> oxirida.
 ///
-/// Alifboning har bir harfi uchun bitta dars (`SoundLessons.all`). Yangi so'z `LetterWords` ga
+/// Alifboning har bir harfi (28 ta) uchun bitta dars (`SoundLessons.all`). Yangi so'z `LetterWords` ga
 /// qo'shilsa, u mos darsning mos bosqichiga o'zi tushadi.
 struct SoundLesson: Identifiable, Hashable, Sendable {
     /// Alifbo kaliti (`UzbekLetter.id`): "r", "sh", "o_apos". Progress va fayl nomlari shunga bog'langan.
     let id: String
     /// Tovush (normallashtirilgan grafema): "r", "sh", "o'". Tashxis shu bilan ishlaydi.
     let sound: String
-    /// Ekrandagi harf: "R", "Oʻ".
+    /// Ekrandagi harf (yangi alifbo): "R", "Ö", "Ş".
     let letter: String
-    /// Kichik shakli: "r", "oʻ" — so'z ichida harfni belgilash uchun.
+    /// Kichik shakli: "r", "ö", "ş" — so'z ichida harfni belgilash uchun.
     let lower: String
     /// Tovushni qanday aytish (bolaga, sodda tilda).
     let hint: String
@@ -140,9 +140,9 @@ enum SoundLessons {
 
     /// Quloq o'yini: bolalar shu tovush o'rniga ko'p aytadigan tovush. `nil` — o'yin yo'q.
     ///
-    /// Bu faqat eshitish mashqi (nutq tanish ishlatilmaydi), shuning uchun `oʻ`/`gʻ` ham bor —
+    /// Bu faqat eshitish mashqi (nutq tanish ishlatilmaydi), shuning uchun `ö`/`ğ` ham bor —
     /// ular uchun xato nomlanmaydi (`SpeechDiagnosis.knownSwaps` ga qarang), lekin quloq bilan
-    /// farqlash foydali ("oʻt" / "ot").
+    /// farqlash foydali ("öt" / "ot").
     static func pairSwap(forLetterID id: String) -> String? {
         switch id {
         case "l":      return "y"
@@ -156,7 +156,6 @@ enum SoundLessons {
         case "v":      return "b"
         case "k":      return "t"
         case "g":      return "d"
-        case "ng":     return "n"
         case "g_apos": return "g"
         case "o_apos": return "o"
         default:       return nil
@@ -167,10 +166,8 @@ enum SoundLessons {
     /// takrorlab ("p-p-p").
     static func drawnSound(forLetterID id: String, lower: String) -> String {
         switch id {
-        case "b", "d", "g", "k", "p", "q", "t", "j", "ch", "y", "ng":
+        case "b", "d", "g", "k", "p", "q", "t", "j", "ch", "y":
             return lower + "-" + lower + "-" + lower
-        case "sh":
-            return "shhh"
         default:
             return lower + lower + lower
         }
@@ -203,12 +200,9 @@ enum SoundLessons {
                        emoji: "", modelClip: "sound_" + id)
         ]
         if !isVowel(id) {
-            // "Ng" o'zbekchada so'z boshida kelmaydi — faqat yopiq bo'g'in.
-            if id != "ng" {
-                soundItems.append(LessonItem(id: id + ".syl.open", kind: .syllables,
-                                             text: syllables(open: true, lower: letter.lower),
-                                             emoji: "", modelClip: "syl_" + id + "_open"))
-            }
+            soundItems.append(LessonItem(id: id + ".syl.open", kind: .syllables,
+                                         text: syllables(open: true, lower: letter.lower),
+                                         emoji: "", modelClip: "syl_" + id + "_open"))
             soundItems.append(LessonItem(id: id + ".syl.closed", kind: .syllables,
                                          text: syllables(open: false, lower: letter.lower),
                                          emoji: "", modelClip: "syl_" + id + "_closed"))
@@ -229,7 +223,7 @@ enum SoundLessons {
             var pairs: [LessonItem] = []
             for word in start + middle + end {
                 if pairs.count >= 4 { break }
-                pairs.append(pair(lesson: id, word, wrong: replacing(sound, with: swap, in: word.text)))
+                pairs.append(pair(lesson: id, word, wrong: UzbekOrthography.modern(replacing(sound, with: swap, in: word.text))))
             }
             if pairs.count >= 2 {
                 stages.append(LessonStage(id: id + ".listen", title: Strings.Coach.stageListen,
@@ -296,11 +290,11 @@ enum SoundLessons {
                     ]
                 ),
                 wordStage(lesson: "r", stageID: "start", title: Strings.Coach.stageStart,
-                          words: words(["rasm", "rang", "robot", "raketa", "ruchka"])),
+                          words: words(["rasm", "rang", "robot", "raketa", "ru\u{00E7}ka"])),
                 wordStage(lesson: "r", stageID: "middle", title: Strings.Coach.stageMiddle,
                           words: words(["arra", "tarvuz", "burun", "yurak"])),
                 wordStage(lesson: "r", stageID: "end", title: Strings.Coach.stageEnd,
-                          words: words(["qor", "shar", "pomidor", "sigir"]))
+                          words: words(["qor", "\u{015F}ar", "pomidor", "sigir"]))
             ]
         )
     }

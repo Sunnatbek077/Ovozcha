@@ -11,7 +11,7 @@ enum TraceKind: Sendable, Hashable {
 struct TraceSubject: Equatable, Hashable, Sendable {
     /// Barqaror kalit: harf uchun "a", "o_apos"; raqam uchun "5".
     let id: String
-    /// Ekranda chiziladigan matn: "B", "sh", "10".
+    /// Ekranda chiziladigan matn: "B", "ş", "10".
     let text: String
     let kind: TraceKind
     /// Faqat harflar uchun: bosh yoki kichik shakl.

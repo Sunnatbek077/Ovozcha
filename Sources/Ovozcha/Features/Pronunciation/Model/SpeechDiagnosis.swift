@@ -35,8 +35,8 @@ enum SpeechDiagnosis: Equatable, Sendable {
 /// 2. Aniq xato faqat bolalarda haqiqatan uchraydigan almashtirish bo'lsa (`knownSwaps`) va
 ///    so'zning QOLGAN qismi to'g'ri bo'lsa aytiladi. Aks holda — umumiy "yana bir marta".
 /// 3. Murabbiy "sen xato qilding" demaydi, "men ... eshitdim" deydi (`CoachScript`).
-/// 4. `oʻ`/`o` va `gʻ`/`g` bir xil hisoblanadi (mashq tovushining o'zi bo'lmasa): Whisper
-///    belgini ko'pincha tushirib qoldiradi ("roʻmol" -> "romol").
+/// 4. `ö`/`o` va `ğ`/`g` bir xil hisoblanadi (mashq tovushining o'zi bo'lmasa): Whisper
+///    belgini ko'pincha tushirib qoldiradi ("römol" -> "romol").
 /// 5. Qo'sh tovush bitta hisoblanadi: Whisper to'g'ri aytilgan "arra" ni "Ara" deb yozadi,
 ///    bu "r tushib qoldi" deb chiqmasligi kerak (`collapsingDoubles`).
 extension SpeechDiagnosis {
@@ -47,8 +47,8 @@ extension SpeechDiagnosis {
     /// jarangsizlash). O'zbek tili uchun logoped bilan tasdiqlanishi kerak. Ro'yxatga kirmagan
     /// almashtirish aniq nomlanmaydi — murabbiy faqat "yana bir marta" deydi.
     ///
-    /// `oʻ` va `gʻ` ATAYLAB yo'q: Whisper to'g'ri aytilganda ham belgini tushirib, "o"/"g" deb
-    /// yozadi — "oʻ o'rniga o eshitdim" desak, bolani nohaq ayblaymiz. Ular uchun faqat quloq
+    /// `ö` va `ğ` ATAYLAB yo'q: Whisper to'g'ri aytilganda ham belgini tushirib, "o"/"g" deb
+    /// yozadi — "ö o'rniga o eşitdim" desak, bolani nohaq ayblaymiz. Ular uchun faqat quloq
     /// o'yini bor (`SoundLessons.pairSwap`). Unlilar ham yo'q.
     static func knownSwaps(for sound: String) -> [String] {
         switch sound {
@@ -65,7 +65,6 @@ extension SpeechDiagnosis {
         case "v":  return ["b"]
         case "k":  return ["t"]
         case "g":  return ["d"]
-        case "ng": return ["n"]
         default:   return []
         }
     }
@@ -117,10 +116,10 @@ extension SpeechDiagnosis {
     // MARK: Tovushlarga bo'lish
 
     /// Normallashtirilgan so'zni o'zbek tovushlariga (harflariga) bo'ladi:
-    /// "sh", "ch", "ng", "o'", "g'" — bitta birlik. Tutuq belgisi (ra'no) tashlanadi:
-    /// u nutqda deyarli eshitilmaydi va nutq tanish uni yozmaydi.
+    /// "sh", "ch", "o'", "g'" — bitta birlik (yangi alifboda ş, ç, ö, ğ). Tutuq belgisi (ra'no)
+    /// tashlanadi: u nutqda deyarli eshitilmaydi va nutq tanish uni yozmaydi.
     ///
-    /// "qo'ng'iroq" dagi `n` + `g'` — "ng" emas (keyingi belgi apostrof).
+    /// "ng" endi alohida harf emas: "n" va "g" ikki tovush (qo'ng'iroq: q, o', n, g', i, r, o, q).
     static func graphemes(_ normalized: String) -> [String] {
         var chars: [String] = []
         for character in normalized {
@@ -134,16 +133,12 @@ extension SpeechDiagnosis {
         while i < chars.count {
             let current = chars[i]
             let next = i + 1 < chars.count ? chars[i + 1] : ""
-            let afterNext = i + 2 < chars.count ? chars[i + 2] : ""
 
             if (current == "o" || current == "g") && next == "'" {
                 result.append(current + "'")
                 i += 2
             } else if (current == "s" || current == "c") && next == "h" {
                 result.append(current + "h")
-                i += 2
-            } else if current == "n" && next == "g" && afterNext != "'" {
-                result.append("ng")
                 i += 2
             } else if current == "'" {
                 i += 1
@@ -155,7 +150,7 @@ extension SpeechDiagnosis {
         return result
     }
 
-    /// Solishtirish uchun shakl: tovushlar, belgisiz `oʻ`/`gʻ` (mashq tovushi bo'lmasa),
+    /// Solishtirish uchun shakl: tovushlar, belgisiz `ö`/`ğ` (mashq tovushi bo'lmasa),
     /// qo'sh tovushlar bitta.
     static func comparable(_ text: String, focus: String) -> [String] {
         var units: [String] = []
