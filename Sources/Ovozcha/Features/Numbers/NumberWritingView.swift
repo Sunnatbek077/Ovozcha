@@ -1,11 +1,10 @@
 import SwiftUI
 
 /// 3-ekran (PDF): "Son yozish". Harf yozish ekraniga o'xshash: katta ko'rsatma son, ostida
-/// miqdorni ko'rsatuvchi nuqtalar va "Bosing — "besh" deb eshiting" tugmasi.
+/// miqdorni ko'rsatuvchi nuqtalar.
 /// IOS va Android (Skip) uchun umumiy (Android'da animatsiya va haptic yo'q).
 struct NumberWritingView: View {
     @Environment(NumberProgressStore.self) private var store
-    @Environment(LetterAudioPlayer.self) private var audio
     @Environment(SettingsStore.self) private var settings
     @Environment(ActivityStore.self) private var activity
     #if !SKIP
@@ -57,7 +56,6 @@ struct NumberWritingView: View {
         .onChange(of: settings.writingDifficulty) { _, difficulty in
             session.apply(tuning: difficulty.tuning)
         }
-        .onDisappear { audio.stop() }
         .tracksPracticeTime()
         #if !SKIP
         .sensoryFeedback(.success, trigger: session.successCount)
@@ -72,14 +70,6 @@ struct NumberWritingView: View {
                 .frame(maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
             CountDotsView(count: number.value)
                 .padding(.bottom, Theme.Spacing.m)
-            SoundChip(
-                title: Strings.Numbers.soundChip(number.word),
-                audioFileName: number.audioFileName,
-                audio: audio,
-                missingMessage: Strings.Numbers.soundMissing
-            )
-            .padding(.horizontal, Theme.Spacing.m)
-            .padding(.bottom, Theme.Spacing.m)
         }
         .overlay(alignment: .top) {
             if session.hasFeedback {
@@ -147,7 +137,6 @@ struct NumberWritingView: View {
     }
 
     private func reconfigure() {
-        audio.stop()
         session.configure(subject: number.subject)
     }
 

@@ -5,6 +5,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -94,7 +95,15 @@ struct AndroidTabShell: View {
             unselectedTextColor: Color.ovTextSecondary.asComposeColor()
         )
 
-        NavigationBar(containerColor: Color.ovBackground.asComposeColor()) {
+        // Pastki tizim chetini (3 tugmali panel / gesture bar) `ComposeContainer` yuqorida
+        // allaqachon `safeArea` padding sifatida hisobga olgan. `NavigationBar` esa sukut
+        // bo'yicha o'zi ham `WindowInsets.navigationBars` qo'shadi, natijada pastki inset
+        // IKKI marta qo'llanib, panel ostida katta bo'sh joy qolardi. Shuning uchun panelning
+        // o'z insetlarini nolga tenglaymiz.
+        NavigationBar(
+            containerColor: Color.ovBackground.asComposeColor(),
+            windowInsets: WindowInsets(left: 0.dp, top: 0.dp, right: 0.dp, bottom: 0.dp)
+        ) {
             for tab in AppTab.allCases {
                 let isSelected = tab == selected
                 NavigationBarItem(

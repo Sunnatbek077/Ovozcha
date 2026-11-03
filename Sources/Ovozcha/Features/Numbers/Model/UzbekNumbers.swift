@@ -10,8 +10,6 @@ struct NumberItem: Identifiable, Hashable, Sendable {
     var id: String { String(value) }
     /// Ekranda chiziladigan matn.
     var text: String { String(value) }
-    /// Ovoz fayli nomi (kengaytmasiz): `number_5`.
-    var audioFileName: String { "number_" + String(value) }
 
     var subject: TraceSubject {
         return TraceSubject(id: id, text: text, kind: TraceKind.digit, letterCase: nil)
